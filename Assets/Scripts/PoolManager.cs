@@ -21,10 +21,12 @@ namespace KenneyJam2025
             {
                 if (item.Prefab == null) continue;
 
+                GameObject parent = new GameObject($"{item.Prefab.name} Pool");
+                parent.transform.SetParent(transform); // Set the parent to the PoolManager's transform
                 Queue<GameObject> queue = new Queue<GameObject>();
                 for (int i = 0; i < item.InitialSize; i++)
                 {
-                    GameObject instance = Instantiate(item.Prefab);
+                    GameObject instance = Instantiate(item.Prefab, parent.transform);
                     instance.name = item.Prefab.name; // Ensure the name is set correctly
                     instance.SetActive(false);
                     queue.Enqueue(instance);
