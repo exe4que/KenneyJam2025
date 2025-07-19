@@ -8,7 +8,7 @@ namespace KenneyJam2025
     {
         private List<Bullet> _bullets = new List<Bullet>();
         
-        public void Shoot(Ray trajectory, float maxRange, IShooter shooter)
+        public void Shoot(Ray trajectory, float maxRange, float damage, IShooter shooter)
         {
             PhysicalBullet physicalBullet = PoolManager.Instance.GetInstance("BulletPrefab").GetComponent<PhysicalBullet>();
             Bullet bullet = new Bullet
@@ -17,6 +17,7 @@ namespace KenneyJam2025
                 LastPosition = 0f,
                 Position = 0f,
                 MaxRange = maxRange,
+                Damage = damage,
                 Shooter = shooter,
                 PhysicalBullet = physicalBullet
             };
@@ -43,11 +44,10 @@ namespace KenneyJam2025
                     IDamageable damageable = hitInfo.collider.GetComponent<IDamageable>();
                     if (damageable != null)
                     {
-                        float damage = bullet.Position - bullet.LastPosition; // Example damage calculation
-                        damageable.OnDamage(damage, bullet.Shooter);
+                        damageable.OnDamage(bullet.Damage, bullet.Shooter);
                         if (bullet.Shooter != null)
                         {
-                            bullet.Shooter.OnSomethingDamaged(damageable, damage);
+                            bullet.Shooter.OnSomethingDamaged(damageable, bullet.Damage);
                         }
                     }
 
@@ -70,6 +70,7 @@ namespace KenneyJam2025
         public float Position;
         public float LastPosition;
         public float MaxRange;
+        public float Damage;
         public IShooter Shooter;
         public PhysicalBullet PhysicalBullet;
     }

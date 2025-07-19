@@ -11,17 +11,23 @@ namespace KenneyJam2025
 
         public override void Init(IShooter shooter)
         {
-            
+            _shooter = shooter;
+        }
+
+        public override void Equip()
+        {
         }
 
         public override void StartShooting()
         {
             _isShooting = true;
+            Debug.Log("Started shooting with PistolGun");
         }
 
         public override void StopShooting()
         {
             _isShooting = false;
+            Debug.Log("Stopped shooting with PistolGun");
         }
         
         private void FixedUpdate()
@@ -31,6 +37,12 @@ namespace KenneyJam2025
                 // Logic to shoot the gun
                 _lastFireTime = Time.time;
                 // Here you would typically instantiate a bullet or perform a raycast
+                Ray shootRay = _shooter.GetShootRay();
+                if (_isShooting)
+                {
+                    // Call the shooting manager to handle the bullet logic
+                    ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter);
+                }
             }
         }
     }

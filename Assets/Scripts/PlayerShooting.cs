@@ -1,5 +1,4 @@
 using System;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,7 +7,24 @@ namespace KenneyJam2025
     public class PlayerShooting : MonoBehaviour, IShooter
     {
         public InputActionReference ShootAction;
-        [ReadOnly] public Gun EquipedGun;
+        public Gun EquipedGun;
+        
+        public Gun[] Guns;
+        
+        private void Awake()
+        {
+            if (Guns.Length == 0)
+            {
+                Debug.LogError("No guns assigned to PlayerShooting.");
+                return;
+            }
+
+            for (int i = 0; i < Guns.Length; i++)
+            {
+                Guns[i].Init(this);
+            }
+            EquipGun(0);
+        }
         private void Update()
         {
             if (ShootAction.action.WasPressedThisFrame())
@@ -19,6 +35,24 @@ namespace KenneyJam2025
             {
                 StopShooting();
             }
+        }
+
+        public void EquipGun(int index)
+        {
+            if (index < 0 || index >= Guns.Length)
+            {
+                Debug.LogError($"Invalid gun index: {index}. Cannot equip gun.");
+                return;
+            }
+
+            if (EquipedGun != null)
+            {
+                EquipedGun.StopShooting(); // Stop the current gun before switching
+            }
+
+            EquipedGun = Guns[index];
+            EquipedGun.Equip(); // Equip the new gun
+            Debug.Log($"Equipped gun: {EquipedGun.name}");
         }
 
         public void StartShooting()
@@ -34,6 +68,11 @@ namespace KenneyJam2025
         public void OnSomethingDamaged(IDamageable target, float damage)
         {
             
+        }
+
+        public Ray GetShootRay()
+        {
+            return new Ray(this.transform.position, this.transform.forward);
         }
     }
 }
