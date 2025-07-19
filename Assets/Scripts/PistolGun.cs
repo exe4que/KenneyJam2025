@@ -40,9 +40,9 @@ namespace KenneyJam2025
                 // Logic to shoot the gun
                 _lastFireTime = Time.time;
                 // Here you would typically instantiate a bullet or perform a raycast
-                Ray shootRay = _shooter.GetShootRay();
                 if (_isShooting)
                 {
+                    Ray shootRay = new Ray(this.transform.position, this.transform.forward);
                     // Call the shooting manager to handle the bullet logic
                     ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter);
                 }

@@ -77,10 +77,5 @@ namespace KenneyJam2025
         {
             
         }
-
-        public Ray GetShootRay()
-        {
-            return new Ray(this.transform.position + Vector3.up, this.transform.forward);
-        }
     }
 }

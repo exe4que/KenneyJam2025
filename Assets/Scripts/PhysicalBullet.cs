@@ -5,6 +5,9 @@ namespace KenneyJam2025
 {
     public class PhysicalBullet : MonoBehaviour
     {
+        [SerializeField] private float Length = 1f;
+        [SerializeField] private float Thickness = 0.25f;
+        [SerializeField] private Color Color = Color.red;
         [SerializeField] private LineRenderer _lineRenderer;
         private Bullet _bullet;
         
@@ -13,8 +16,10 @@ namespace KenneyJam2025
             _bullet = bullet;
             _lineRenderer.positionCount = 2;
             _lineRenderer.widthMultiplier = 1f;
-            _lineRenderer.startWidth = 0.25f;
-            _lineRenderer.endWidth = 0.25f;
+            _lineRenderer.startWidth = Thickness;
+            _lineRenderer.endWidth = Thickness;
+            _lineRenderer.startColor = Color;
+            _lineRenderer.endColor = Color;
             
             _lineRenderer.transform.position = _bullet.Trajectory.origin;
             _lineRenderer.transform.rotation = Quaternion.LookRotation(_bullet.Trajectory.direction, Vector3.up);
@@ -26,7 +31,7 @@ namespace KenneyJam2025
         {
             if (_bullet.Position >= _bullet.MaxRange) return;
 
-            Vector3 startPosition = new Vector3(0, 0, _bullet.LastPosition);
+            Vector3 startPosition = new Vector3(0, 0, _bullet.Position - Length);
             Vector3 endPosition = new Vector3(0, 0, _bullet.Position);
 
             _lineRenderer.SetPosition(0, startPosition);
