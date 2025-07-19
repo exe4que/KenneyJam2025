@@ -18,6 +18,7 @@ namespace KenneyJam2025
             
             _lineRenderer.transform.position = _bullet.Trajectory.origin;
             _lineRenderer.transform.rotation = Quaternion.LookRotation(_bullet.Trajectory.direction, Vector3.up);
+            Debug.Log("Bullet fired!");
         }
 
         private void Update()
@@ -31,8 +32,9 @@ namespace KenneyJam2025
             _lineRenderer.SetPosition(1, endPosition);
         }
         
-        public bool ReturnToPool()
+        public bool ReturnToPool(bool impacted)
         {
+            Debug.Log($"Returning bullet to pool. Impacted: {impacted}");
             _bullet = null;
             PoolManager.Instance.ReturnInstance(this.gameObject);
             return true;

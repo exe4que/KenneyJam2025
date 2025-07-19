@@ -6,6 +6,8 @@ namespace KenneyJam2025
 {
     public class ShootingManager : Singleton<ShootingManager>
     {
+        [SerializeField][Range(0,200)] private float _bulletSpeed = 50f;
+        [SerializeField][Range(0,200)] private float _specialBulletSpeed = 25f;
         private List<Bullet> _bullets = new List<Bullet>();
         
         public void Shoot(Ray trajectory, float maxRange, float damage, IShooter shooter)
@@ -31,7 +33,7 @@ namespace KenneyJam2025
             {
                 Bullet bullet = _bullets[i];
                 bullet.LastPosition = bullet.Position;
-                bullet.Position += bullet.Speed * Time.fixedDeltaTime;
+                bullet.Position += _bulletSpeed * Time.fixedDeltaTime;
                 bool reachedMaxRange = bullet.Position >= bullet.MaxRange;
                 if (reachedMaxRange)
                 {
@@ -42,7 +44,7 @@ namespace KenneyJam2025
                 if (Physics.Raycast(ray, out RaycastHit hitInfo, bullet.Position - bullet.LastPosition))
                 {
                     IDamageable damageable = hitInfo.collider.GetComponent<IDamageable>();
-                    if (damageable != null)
+                    if (damageable != null && damageable.Name != bullet.Shooter.Name)
                     {
                         damageable.OnDamage(bullet.Damage, bullet.Shooter);
                         if (bullet.Shooter != null)
@@ -51,13 +53,13 @@ namespace KenneyJam2025
                         }
                     }
 
-                    _bullets[i].PhysicalBullet.ReturnToPool();
+                    _bullets[i].PhysicalBullet.ReturnToPool(true);
                     _bullets.RemoveAt(i);
                 }
                 
                 if (reachedMaxRange)
                 {
-                    _bullets[i].PhysicalBullet.ReturnToPool();
+                    _bullets[i].PhysicalBullet.ReturnToPool(false);
                     _bullets.RemoveAt(i);
                 }
             }
@@ -65,7 +67,6 @@ namespace KenneyJam2025
     }
     public class Bullet
     {
-        public float Speed;
         public Ray Trajectory;
         public float Position;
         public float LastPosition;

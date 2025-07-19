@@ -16,6 +16,9 @@ namespace KenneyJam2025
 
         public override void Equip()
         {
+            _lastFireTime = Time.time - FireRate - 1f;
+            _isShooting = false;
+            Debug.Log("PistolGun equipped.");
         }
 
         public override void StartShooting()

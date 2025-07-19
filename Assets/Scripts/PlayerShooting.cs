@@ -37,6 +37,14 @@ namespace KenneyJam2025
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return gameObject.name;
+            }
+        }
+
         public void EquipGun(int index)
         {
             if (index < 0 || index >= Guns.Length)
@@ -72,7 +80,7 @@ namespace KenneyJam2025
 
         public Ray GetShootRay()
         {
-            return new Ray(this.transform.position, this.transform.forward);
+            return new Ray(this.transform.position + Vector3.up, this.transform.forward);
         }
     }
 }
