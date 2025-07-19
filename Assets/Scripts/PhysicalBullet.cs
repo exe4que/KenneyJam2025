@@ -19,6 +19,7 @@ namespace KenneyJam2025
             _lineRenderer.transform.position = _bullet.Trajectory.origin;
             _lineRenderer.transform.rotation = Quaternion.LookRotation(_bullet.Trajectory.direction, Vector3.up);
             Debug.Log("Bullet fired!");
+            GlobalEvents.ShotFired?.Invoke(_bullet.Shooter);
         }
 
         private void Update()

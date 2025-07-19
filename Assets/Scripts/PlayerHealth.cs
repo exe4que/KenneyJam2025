@@ -25,6 +25,7 @@ namespace KenneyJam2025
         {
             currentHealth -= damage;
             Debug.Log($"Player damaged by {damage}. Current health: {currentHealth}");
+            GlobalEvents.SomethingDamaged?.Invoke(shooter, this, damage);
             if (currentHealth <= 0)
             {
                 Die(shooter);
@@ -33,6 +34,7 @@ namespace KenneyJam2025
 
         public void Die(IShooter shooter)
         {
+            GlobalEvents.PlayerDied?.Invoke();
             Debug.Log("Player has died.");
         }
 
