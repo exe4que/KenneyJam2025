@@ -24,13 +24,13 @@ namespace KenneyJam2025
         public override void StartShooting()
         {
             _isShooting = true;
-            Debug.Log("Started shooting with PistolGun");
+            //Debug.Log("Started shooting with PistolGun");
         }
 
         public override void StopShooting()
         {
             _isShooting = false;
-            Debug.Log("Stopped shooting with PistolGun");
+            //Debug.Log("Stopped shooting with PistolGun");
         }
 
         public override void ShootSpecialBullet()
@@ -51,7 +51,7 @@ namespace KenneyJam2025
                 {
                     Ray shootRay = new Ray(this.transform.position, this.transform.forward);
                     // Call the shooting manager to handle the bullet logic
-                    ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter, "BulletPrefab", true);
+                    ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter, "BulletPrefab", false);
                 }
             }
         }
