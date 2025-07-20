@@ -7,7 +7,9 @@ namespace KenneyJam2025
     {
         [SerializeField] private float maxHealth = 100f;
         
-        private float currentHealth;
+     
+        public float currentHealth {get; private set;}
+
         public string Name
         {
             get
@@ -19,6 +21,15 @@ namespace KenneyJam2025
         private void Start()
         {
             currentHealth = maxHealth;
+        }
+
+        private void Update()
+        {
+            if (this.transform.position.y < -6f)
+            {
+                // If the player falls below a certain height, they die
+                Die(null);
+            }
         }
 
         public void OnDamage(float damage, IShooter shooter)
@@ -34,6 +45,7 @@ namespace KenneyJam2025
 
         public void Die(IShooter shooter)
         {
+            currentHealth = 0f;
             GlobalEvents.PlayerDied?.Invoke();
             Debug.Log("Player has died.");
         }

@@ -31,6 +31,7 @@ namespace KenneyJam2025
 
         private void FixedUpdate()
         {
+            if (GameManager.Instance.GameOver) return;
             for (int i = _bullets.Count - 1; i >= 0; i--)
             {
                 Bullet bullet = _bullets[i];
@@ -66,12 +67,14 @@ namespace KenneyJam2025
                     {
                         GameManager.Instance.OnSpecialBulletMiss();
                     }
+
+                    continue;
                 }
                 
                 if (reachedMaxRange)
                 {
-                    _bullets[i].PhysicalBullet.ReturnToPool(false, 0);
-                    _bullets.RemoveAt(i);
+                    bullet.PhysicalBullet.ReturnToPool(false, 0);
+                    _bullets.Remove(bullet);
                 }
             }
         }

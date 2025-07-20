@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace KenneyJam2025
 {
@@ -21,6 +22,22 @@ namespace KenneyJam2025
         private Camera _camera;
         private Ray _ray;
 
+        private void OnEnable()
+        {
+            GlobalEvents.PlayerDied += OnPlayerDied;
+        }
+        
+        private void OnDisable()
+        {
+            GlobalEvents.PlayerDied -= OnPlayerDied;
+        }
+        
+        private void OnPlayerDied()
+        {
+            Vector3 randomPosition = transform.position + Random.insideUnitSphere;
+            _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
+        }
+
         private void Start()
         {
             _camera = GameManager.Instance.MainCamera;
@@ -28,6 +45,7 @@ namespace KenneyJam2025
 
         private void Update()
         {
+            if (GameManager.Instance.GameOver) return;
             _moveInput = _movement.action.ReadValue<Vector2>();
             if (_mouseLook != null && _mouseLook.action != null)
             {
@@ -46,6 +64,7 @@ namespace KenneyJam2025
 
         private void FixedUpdate()
         {
+            if (GameManager.Instance.GameOver) return;
             Vector3 move = new Vector3(_moveInput.x, 0, _moveInput.y);
             if (move.magnitude > 1f)
             {

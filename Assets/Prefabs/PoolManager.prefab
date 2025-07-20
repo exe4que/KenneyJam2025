@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolItems:
   - Prefab: {fileID: 2296005608749743692, guid: 76ad57693fdf22e4b967997dcc3d6566, type: 3}
-    InitialSize: 300
+    InitialSize: 100
   - Prefab: {fileID: 2296005608749743692, guid: 6a020d0175793714a964eb62bcd18951, type: 3}
     InitialSize: 20
+  - Prefab: {fileID: 2296005608749743692, guid: 9b1eaa9090f480407a42ce990614d802, type: 3}
+    InitialSize: 100
+  - Prefab: {fileID: 2296005608749743692, guid: b2fe1db3cbe5b28c599465c68ba9cb97, type: 3}
+    InitialSize: 100

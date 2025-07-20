@@ -50,17 +50,8 @@ namespace KenneyJam2025
             else
             {
                 _bullet.Position += ShootingManager.Instance.BulletSpeed * Time.deltaTime;
-                if (_impacted)
-                {
-                    startPosition = new Vector3(0, 0, Mathf.Min(_impactDistance, _bullet.Position - Length));
-                    endPosition = new Vector3(0, 0, _impactDistance);
-                }
-                else
-                {
-                    float minLength = Mathf.Min(Length, _bullet.Position);
-                    startPosition = new Vector3(0, 0, _bullet.Position - minLength);
-                    endPosition = new Vector3(0, 0, _bullet.Position);
-                }
+                startPosition = new Vector3(0, 0, Mathf.Min(_impactDistance, _bullet.Position - Length));
+                endPosition = new Vector3(0, 0, _impactDistance);
             }
 
             _lineRenderer.SetPosition(0, startPosition);

@@ -16,6 +16,11 @@ namespace KenneyJam2025
 
         
         [SerializeField] private Gun[] _guns;
+        [SerializeField] private GameObject[] _visualGuns;
+
+        [SerializeField] private InputActionReference _Gun0Action;
+        [SerializeField] private InputActionReference _Gun1Action;
+        [SerializeField] private InputActionReference _Gun2Action;
 
 
         private void OnEnable()
@@ -69,6 +74,21 @@ namespace KenneyJam2025
             {
                 StopShooting();
             }
+
+            // only for testing purposes, comment out in production
+            if (_Gun0Action != null && _Gun0Action.action.WasPressedThisFrame())
+            {
+                EquipGun(0);
+            }
+            else if (_Gun1Action != null && _Gun1Action.action.WasPressedThisFrame())
+            {
+                EquipGun(1);
+            }
+            else if (_Gun2Action != null && _Gun2Action.action.WasPressedThisFrame())
+            {
+                EquipGun(2);
+            }
+
         }
 
         public string Name
@@ -97,6 +117,11 @@ namespace KenneyJam2025
 
             _equipedGun = _guns[index];
             _equipedGun.Equip(); 
+            
+            for (int i = 0; i < _visualGuns.Length; i++)
+            {
+                _visualGuns[i].SetActive(i == index);
+            }
             Debug.Log($"Equipped gun: {_equipedGun.name}");
         }
 
