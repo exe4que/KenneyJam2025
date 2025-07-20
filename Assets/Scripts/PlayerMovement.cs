@@ -21,6 +21,8 @@ namespace KenneyJam2025
         private Vector3 _right;
         private Camera _camera;
         private Ray _ray;
+        private float _runAnimationParameter = 0.0f;
+        private float _runAnimationFillDuration = 0.3f;
 
         private void OnEnable()
         {
@@ -47,6 +49,18 @@ namespace KenneyJam2025
         {
             if (GameManager.Instance.GameOver) return;
             _moveInput = _movement.action.ReadValue<Vector2>();
+            
+            // handle run animation parameter
+            if (_moveInput.magnitude > 0.1f)
+            {
+                _runAnimationParameter = Mathf.MoveTowards(_runAnimationParameter, 1.0f, Time.deltaTime / _runAnimationFillDuration);
+            }
+            else
+            {
+                _runAnimationParameter = Mathf.MoveTowards(_runAnimationParameter, 0.0f, Time.deltaTime / _runAnimationFillDuration);
+            }
+            _animator.SetFloat("Run", _runAnimationParameter);
+            
             if (_mouseLook != null && _mouseLook.action != null)
             {
                 Vector2 mousePosition = _mouseLook.action.ReadValue<Vector2>();
@@ -86,7 +100,6 @@ namespace KenneyJam2025
                 Vector3 directionToMouse = (_mouse3DPosition - _rigidbody.position).normalized;
                 _rigidbody.rotation = Quaternion.LookRotation(directionToMouse, Vector3.up);
             }
-            _animator.SetFloat("Speed", moveDirection.magnitude * _speedMultiplier);
             //Debug.Log($"Speed: {moveDirection.magnitude:F2} | IsShooting: {_animator.GetBool("IsShooting")}");
         }
 
