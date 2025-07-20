@@ -101,6 +101,7 @@ namespace KenneyJam2025
 
         public Vector3 Position => transform.position;
         public GameObject GameObject => gameObject;
+        public float ImprecisionNoise => 0f;
 
         public void EquipGun(int index)
         {

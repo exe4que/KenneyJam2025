@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 namespace KenneyJam2025
 {
@@ -8,11 +9,19 @@ namespace KenneyJam2025
     {
         [Range(0,200)] public float BulletSpeed = 50f;
         [Range(0,200)] public float SpecialBulletSpeed = 25f;
+        
         public float SpecialBulletDamage = 100f;
         private List<Bullet> _bullets = new List<Bullet>();
         
         public void Shoot(Ray trajectory, float maxRange, float damage, IShooter shooter, string bulletName, bool special)
         {
+            float imprecisionNoise = shooter.ImprecisionNoise;
+            // Apply imprecision noise to the trajectory
+            Vector3 direction = trajectory.direction;
+            direction += UnityEngine.Random.insideUnitSphere * imprecisionNoise;
+            direction.y = 0f;
+            direction.Normalize();
+            trajectory.direction = direction;
             PhysicalBullet physicalBullet = PoolManager.Instance.GetInstance(bulletName).GetComponent<PhysicalBullet>();
             Bullet bullet = new Bullet
             {

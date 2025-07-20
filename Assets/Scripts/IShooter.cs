@@ -7,6 +7,7 @@ namespace KenneyJam2025
         string Name { get; }
         Vector3 Position { get; }
         GameObject GameObject { get; }
+        float ImprecisionNoise { get; }
         void EquipGun(int index);
         void StartShooting();
         void StopShooting();

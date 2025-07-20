@@ -9,6 +9,8 @@ namespace KenneyJam2025
         public Camera MainCamera;
         public LevelSettings[] LevelSettings;
         public InputActionReference UpdradeAction;
+        public LevelSettings CurrentLevelSettings => LevelSettings[_currentLevelIndex];
+        public int WeaponIndex => _weaponIndex;
         
         private int _weaponIndex = 0;
         private float _timeLeft;
@@ -73,7 +75,7 @@ namespace KenneyJam2025
             }
             
             float timeLeftPercentage = _timeLeft / LevelSettings[_currentLevelIndex].TimerDuration;
-            
+            GlobalEvents.MainMechanicTimerTicked?.Invoke(timeLeftPercentage);
             
             //Debug.Log($"Time Left Percentage: {timeLeftPercentage}");
             if (_weaponIndex >= 0 && timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x &&
@@ -82,6 +84,7 @@ namespace KenneyJam2025
                 if(!_upgrade1Open)
                 {
                     Debug.Log("Upgrade Window 1 Open");
+                    GlobalEvents.UpgradeWindowOpen?.Invoke(0);
                 }
                 _upgrade1Open = true;
                 if (_upgrade1AlreadyActivated) return; // Prevent multiple activations
@@ -99,6 +102,7 @@ namespace KenneyJam2025
                 if(!_upgrade2Open)
                 {
                     Debug.Log("Upgrade Window 2 Open");
+                    GlobalEvents.UpgradeWindowOpen?.Invoke(1);
                 }
                 _upgrade2Open = true;
                 if (_upgrade2AlreadyActivated) return; // Prevent multiple activations
@@ -118,6 +122,7 @@ namespace KenneyJam2025
                 if(!_upgrade3Open)
                 {
                     Debug.Log("Upgrade Window 3 Open");
+                    GlobalEvents.UpgradeWindowOpen?.Invoke(2);
                 }
                 _upgrade3Open = true;
                 if (_upgrade3AlreadyActivated) return; // Prevent multiple activations
@@ -141,6 +146,7 @@ namespace KenneyJam2025
                 if (_upgrade1Open)
                 {
                     Debug.Log("Upgrade Window 1 Closed");
+                    GlobalEvents.UpgradeWindowClosed?.Invoke(0);
                 }
                 _upgrade1AlreadyActivated = false;
                 _upgrade1Open = false;
@@ -155,6 +161,7 @@ namespace KenneyJam2025
                 if (_upgrade2Open)
                 {
                     Debug.Log("Upgrade Window 2 Closed");
+                    GlobalEvents.UpgradeWindowClosed?.Invoke(1);
                 }
                 _upgrade2AlreadyActivated = false;
                 _upgrade2Open = false;
@@ -168,6 +175,7 @@ namespace KenneyJam2025
                 if (_upgrade3Open)
                 {
                     Debug.Log("Upgrade Window 3 Closed");
+                    GlobalEvents.UpgradeWindowClosed?.Invoke(2);
                 }
                 _upgrade3AlreadyActivated = false;
                 _upgrade3Open = false;
