@@ -27,7 +27,7 @@ public class VFXPlayer : MonoBehaviour
         PlayVFX();
     }
 
-    private void OnGunUpgrade(int obj)
+    private void OnGunUpgrade(IShooter i, int obj)
     {
         if (!_isTriggeredByDeath) return;
         PlayVFX();
