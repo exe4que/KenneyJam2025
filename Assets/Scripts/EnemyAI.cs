@@ -299,7 +299,7 @@ namespace KenneyJam2025
             //add explosion force
             Vector3 randomPosition = transform.position + Random.insideUnitSphere;
             //make it explode
-            _rigidbody.AddExplosionForce(100f, randomPosition, 5f, 1f, ForceMode.Impulse);
+            _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
         }
 
         private void CheckCriticalHealth()

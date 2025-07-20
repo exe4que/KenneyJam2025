@@ -1554,7 +1554,7 @@ MonoBehaviour:
   _mainScene: Global
   _scenesAdditive:
   - InGameUI
-  - Level final 1
+  - Level final
 --- !u!4 &1344578450
 Transform:
   m_ObjectHideFlags: 0
