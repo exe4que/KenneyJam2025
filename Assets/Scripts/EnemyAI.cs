@@ -1,7 +1,9 @@
 using System;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.Build.Content;
+#endif
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
