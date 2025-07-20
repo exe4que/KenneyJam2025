@@ -5,6 +5,8 @@ namespace KenneyJam2025
     public interface IShooter
     {
         string Name { get; }
+        Vector3 Position { get; }
+        GameObject GameObject { get; }
         void EquipGun(int index);
         void StartShooting();
         void StopShooting();
