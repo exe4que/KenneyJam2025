@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionRadius: 2
   _damage: 30
-  _explosionEffect: {fileID: 0}
+  _explosionEffect: {fileID: 99776912596985787, guid: 87d6250599e00064d851c3728ab46708, type: 3}
   _delayBeforeExplosion: 1
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _flashInterval: 0.1
