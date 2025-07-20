@@ -8,11 +8,12 @@ namespace KenneyJam2025
     {
         [Range(0,200)] public float BulletSpeed = 50f;
         [Range(0,200)] public float SpecialBulletSpeed = 25f;
+        public float SpecialBulletDamage = 100f;
         private List<Bullet> _bullets = new List<Bullet>();
         
-        public void Shoot(Ray trajectory, float maxRange, float damage, IShooter shooter)
+        public void Shoot(Ray trajectory, float maxRange, float damage, IShooter shooter, string bulletName, bool special)
         {
-            PhysicalBullet physicalBullet = PoolManager.Instance.GetInstance("BulletPrefab").GetComponent<PhysicalBullet>();
+            PhysicalBullet physicalBullet = PoolManager.Instance.GetInstance(bulletName).GetComponent<PhysicalBullet>();
             Bullet bullet = new Bullet
             {
                 Trajectory = trajectory,
@@ -21,7 +22,8 @@ namespace KenneyJam2025
                 MaxRange = maxRange,
                 Damage = damage,
                 Shooter = shooter,
-                PhysicalBullet = physicalBullet
+                PhysicalBullet = physicalBullet,
+                IsSpecial = special
             };
             physicalBullet.Init(bullet);
             _bullets.Add(bullet);
@@ -33,7 +35,8 @@ namespace KenneyJam2025
             {
                 Bullet bullet = _bullets[i];
                 bullet.LastPosition = bullet.Position;
-                bullet.Position += BulletSpeed * Time.fixedDeltaTime;
+                float speed = bullet.IsSpecial ? SpecialBulletSpeed : BulletSpeed;
+                bullet.Position += speed * Time.fixedDeltaTime;
                 bool reachedMaxRange = bullet.Position >= bullet.MaxRange;
                 if (reachedMaxRange)
                 {
@@ -74,5 +77,6 @@ namespace KenneyJam2025
         public float Damage;
         public IShooter Shooter;
         public PhysicalBullet PhysicalBullet;
+        public bool IsSpecial;
     }
 }
