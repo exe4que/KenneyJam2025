@@ -570,6 +570,7 @@ MonoBehaviour:
   _criticalHealthThreshold: 20
   _changeOfFlyingSceneAtCriticalHealth: 0.5
   _flySceneDistanceRange: {x: 5, y: 10}
+  _shootingImprecisionNoise: 0.3
   _debugText: {fileID: 2053687575673915979}
   _agent: {fileID: 700647461642709197}
   _rigidbody: {fileID: 7604682372702626271}
@@ -578,6 +579,7 @@ MonoBehaviour:
   - {fileID: 2511775270720670956}
   - {fileID: 2511775270720670956}
   - {fileID: 2511775270720670956}
+  _animator: {fileID: 7902195626500902233}
 --- !u!1 &1799153525405805705
 GameObject:
   m_ObjectHideFlags: 0
