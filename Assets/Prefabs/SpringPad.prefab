@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3698e9b0067a1754ea1122ebc4b925d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 14
+  _pushForce: 12
   _upwardModifier: 1.5
   _randomOffsetAngle: 30
   _animator: {fileID: 2633227938430708834}

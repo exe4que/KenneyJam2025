@@ -31,6 +31,7 @@ namespace KenneyJam2025
 
         private void FixedUpdate()
         {
+            if (GameManager.Instance.GameOver) return;
             for (int i = _bullets.Count - 1; i >= 0; i--)
             {
                 Bullet bullet = _bullets[i];
