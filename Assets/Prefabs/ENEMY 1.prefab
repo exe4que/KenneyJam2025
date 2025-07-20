@@ -2048,9 +2048,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09bbd03f08eb414e87fac204947ed8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
-  FireRate: 1
-  Range: 20
+  Damage: 15
+  FireRate: 3
+  Range: 15
 --- !u!1 &4839704422690502539
 GameObject:
   m_ObjectHideFlags: 0
