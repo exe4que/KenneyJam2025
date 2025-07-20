@@ -9,6 +9,7 @@ namespace KenneyJam2025
         [SerializeField] private InputActionReference _movement;
         [SerializeField] private InputActionReference _mouseLook;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Animator _animator;
         [SerializeField] [Range(0, 20)] private float _speed = 5f;
         private Vector2 _moveInput;
         private Vector3 _mouse3DPosition;
@@ -57,6 +58,7 @@ namespace KenneyJam2025
             {
                 moveDirection.Normalize();
             }
+            _animator.SetFloat("Speed", moveDirection.magnitude);
             _rigidbody.MovePosition(_rigidbody.position + moveDirection * (_speed * Time.fixedDeltaTime));
             // Rotate the player to face the mouse position
             if (_mouse3DPosition != Vector3.zero)

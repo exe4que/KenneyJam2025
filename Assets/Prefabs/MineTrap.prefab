@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f7f1c429435e62f4189ce42b6bf8348c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f62b19bb62f18d48b0b5f0382a79855, type: 2}
     - target: {fileID: 919132149155446097, guid: f7f1c429435e62f4189ce42b6bf8348c, type: 3}
       propertyPath: m_Name
       value: bomb_B_yellow
@@ -158,14 +162,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ca5688b322ad742b8ebb4ea71acb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionRadius: 5
+  _explosionRadius: 4
   _damage: 50
   _explosionEffect: {fileID: 0}
   _delayBeforeExplosion: 1
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _flashInterval: 0.1
-  _pushForce: 20
-  _upwardModifier: 1.5
+  _pushForce: 15
+  _upwardModifier: 1
 --- !u!4 &6845314500577860713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f7f1c429435e62f4189ce42b6bf8348c, type: 3}
