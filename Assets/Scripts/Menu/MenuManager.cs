@@ -52,12 +52,8 @@ public class MenuManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        //Load mainScene
-
-        SceneManager.LoadScene(_mainScene);
-
         //Load Additive scenes 
-                    GlobalEvents.OnSceneChangeRequested?.Invoke("MainLevel", _scenesAdditive);
+        GlobalEvents.OnSceneChangeRequested?.Invoke(_mainScene, _scenesAdditive);
 
         _canClick = true;
 
