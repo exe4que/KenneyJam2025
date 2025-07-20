@@ -11,5 +11,6 @@ namespace KenneyJam2025
         public abstract void Equip();
         public abstract void StartShooting();
         public abstract void StopShooting();
+        public abstract void ShootSpecialBullet();
     }
 }
