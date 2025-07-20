@@ -3275,6 +3275,10 @@ PrefabInstance:
       propertyPath: GunUpgraded
       value: 
       objectReference: {fileID: 11400000, guid: 9091abd8902466c4d821d2541f99e998, type: 2}
+    - target: {fileID: 3013780871326410674, guid: f3c9bf3fc3f0838498116b3e96c0a1ed, type: 3}
+      propertyPath: _sceneMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: d3740063f497be74a9eb8a23efce2fac, type: 3}
     - target: {fileID: 3553920912363801656, guid: f3c9bf3fc3f0838498116b3e96c0a1ed, type: 3}
       propertyPath: m_Camera
       value: 
