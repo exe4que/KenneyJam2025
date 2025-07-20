@@ -28,6 +28,7 @@ namespace KenneyJam2025
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Gun _equipedGun;
         [SerializeField] private Gun[] _guns;
+        [SerializeField] private Animator _animator;
         
         private AIState _currentState;
         private AIState SearchingForTargetState;
@@ -42,6 +43,7 @@ namespace KenneyJam2025
         
         private void Start()
         {
+            _animator.SetFloat("Run", 1f);
             InitializeStates();
             if (_guns.Length == 0)
             {
@@ -54,6 +56,7 @@ namespace KenneyJam2025
                 _guns[i].Init(this);
             }
             EquipGun(0);
+            ShootersManager.Instance.RegisterShooter(this);
         }
 
         private void InitializeStates()
@@ -363,6 +366,7 @@ namespace KenneyJam2025
             }
 
             _equipedGun.StartShooting();
+            _animator.SetBool("Attack", true);
         }
 
         public void StopShooting()
@@ -374,6 +378,7 @@ namespace KenneyJam2025
             }
 
             _equipedGun.StopShooting();
+            _animator.SetBool("Attack", false);
         }
 
         public void OnSomethingDamaged(IDamageable target, float damage)

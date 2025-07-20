@@ -136,7 +136,7 @@ namespace KenneyJam2025
         public void StartShooting()
         {
             _equipedGun.StartShooting();
-            _animator.SetBool("isShooting", true);
+            _animator.SetBool("Attack", true);
             if (_movement != null)
             {
                 _movement.SetSpeedMultiplier(_shootingSpeedMultiplier);
@@ -149,7 +149,7 @@ namespace KenneyJam2025
             if (_movement != null)
                 _movement.SetSpeedMultiplier(1f);
 
-            _animator.SetBool("isShooting", false); 
+            _animator.SetBool("Attack", false); 
             //Debug.Log("Dej� de disparar");
         }
 
