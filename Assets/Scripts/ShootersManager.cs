@@ -54,6 +54,11 @@ namespace KenneyJam2025
             {
                 _shooters.Remove(shooter);
             }
+            
+            if(_shooters.Count == 1 && _shooters[0] is PlayerShooting)
+            {
+                GlobalEvents.GameWon?.Invoke();
+            }
         }
     }
 }
