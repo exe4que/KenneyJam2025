@@ -27,12 +27,19 @@ namespace KenneyJam2025
         {
             GlobalEvents.UpgradeGunWindowActivated += OnUpgradeGunWindowActivated;
             GlobalEvents.GunUpgraded += OnGunUpgraded;
+            GlobalEvents.PlayerDied += OnPlayerDied;
         }
         
         private void OnDisable()
         {
             GlobalEvents.UpgradeGunWindowActivated -= OnUpgradeGunWindowActivated;
             GlobalEvents.GunUpgraded -= OnGunUpgraded;
+            GlobalEvents.PlayerDied -= OnPlayerDied;
+        }
+
+        private void OnPlayerDied()
+        {
+            ShootersManager.Instance.UnregisterShooter(this);
         }
 
         private void OnGunUpgraded(int index)

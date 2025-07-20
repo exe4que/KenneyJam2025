@@ -8,6 +8,7 @@ public class TimerControler : MonoBehaviour
     [SerializeField] private Image[] _timerImages;
     [SerializeField] private Animator[] _upgradeWindowsAnimators;
     [SerializeField] private RectTransform[] _upgradeWindowsRectTransforms;
+    [SerializeField] private GameObject _pressButtonSign;
 
     private void OnEnable()
     {
@@ -67,11 +68,13 @@ public class TimerControler : MonoBehaviour
     private void OnUpgradeWindowOpen(int index)
     {
         _upgradeWindowsAnimators[index].SetBool("Animating", true);
+        _pressButtonSign.SetActive(true);
     }
     
     private void OnUpgradeWindowClosed(int index)
     {
         _upgradeWindowsAnimators[index].SetBool("Animating", false);
+        _pressButtonSign.SetActive(false);
     }
     
     private void OnMainMechanicTimerTicked(float timeLeft)
