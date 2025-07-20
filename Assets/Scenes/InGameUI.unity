@@ -462,6 +462,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6529543936807137616, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6949726242482021034, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -492,11 +496,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735871304452143580, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8735871304452143580, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

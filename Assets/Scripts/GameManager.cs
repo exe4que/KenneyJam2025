@@ -182,64 +182,20 @@ namespace KenneyJam2025
             }
         }
 
-
-        private void OnGUI()
+        public void OnSpecialBulletHit(IShooter shooter)
         {
-            if (!_levelActive) return;
-            var settings = LevelSettings[_currentLevelIndex];
-            // draw timer bar
-            float timerPercentage = _timeLeft / LevelSettings[_currentLevelIndex].TimerDuration;
-            GUI.Box(new Rect(10, 10, 200, 20), $"Time Left: {Mathf.CeilToInt(_timeLeft)}s");
-            //green box
-            GUI.Box(new Rect(10, 40, 200 * timerPercentage, 20), GUIContent.none);
-            
-            // draw upgrade windows
-            if (_upgrade1Open && !_upgrade1AlreadyActivated)
+            if (shooter as PlayerShooting != null)
             {
-                GUIStyle styleBox1 = new GUIStyle
-                    { normal = new GUIStyleState { background = Texture2D.whiteTexture, textColor = Color.green } };
-                GUI.Box(new Rect(settings.UpgradeWindow1Range.x * 200f, 70, 
-                    (settings.UpgradeWindow1Range.y - settings.UpgradeWindow1Range.x) * 200f, 20), "1", styleBox1);
+                GlobalEvents.GunUpgraded.Invoke(shooter, _pendingUpgrade);
+                _weaponIndex = _pendingUpgrade;
+                _pendingUpgrade = -1;
             }
             else
             {
-                GUI.Box(new Rect(settings.UpgradeWindow1Range.x * 200f, 70, 
-                    (settings.UpgradeWindow1Range.y - settings.UpgradeWindow1Range.x) * 200f, 20), "1");
+                GlobalEvents.GunUpgraded.Invoke(shooter, Math.Min(shooter.WeaponIndex, 2));
             }
             
-            if (_upgrade2Open && !_upgrade2AlreadyActivated)
-            {
-                GUIStyle styleBox2 = new GUIStyle
-                    { normal = new GUIStyleState { background = Texture2D.whiteTexture, textColor = Color.green } };
-                GUI.Box(new Rect(settings.UpgradeWindow2Range.x * 200f, 70, 
-                    (settings.UpgradeWindow2Range.y - settings.UpgradeWindow2Range.x) * 200f, 20), "2", styleBox2);
-            }
-            else
-            {
-                GUI.Box(new Rect(settings.UpgradeWindow2Range.x * 200f, 70, 
-                    (settings.UpgradeWindow2Range.y - settings.UpgradeWindow2Range.x) * 200f, 20), "2");
-            }
             
-            if (_upgrade3Open && !_upgrade3AlreadyActivated)
-            {
-                GUIStyle styleBox3 = new GUIStyle
-                    { normal = new GUIStyleState { background = Texture2D.whiteTexture, textColor = Color.green } };
-                GUI.Box(new Rect(settings.UpgradeWindow3Range.x * 200f, 70, 
-                    (settings.UpgradeWindow3Range.y - settings.UpgradeWindow3Range.x) * 200f, 20), "3", styleBox3);
-            }
-            else
-            {
-                GUI.Box(new Rect(settings.UpgradeWindow3Range.x * 200f, 70, 
-                    (settings.UpgradeWindow3Range.y - settings.UpgradeWindow3Range.x) * 200f, 20), "3");
-            }
-            
-        }
-
-        public void OnSpecialBulletHit()
-        {
-            GlobalEvents.GunUpgraded.Invoke(_pendingUpgrade);
-            _weaponIndex = _pendingUpgrade;
-            _pendingUpgrade = -1;
         }
 
         public void OnSpecialBulletMiss()
