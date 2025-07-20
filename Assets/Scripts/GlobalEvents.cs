@@ -13,5 +13,6 @@ namespace KenneyJam2025
         public static Action<float> MainMechanicTimerTicked;
         public static Action<int> UpgradeWindowOpen;
         public static Action<int> UpgradeWindowClosed;
+        public static Action GameWon;
     }
 }
