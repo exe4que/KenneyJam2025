@@ -54,6 +54,7 @@ namespace KenneyJam2025
                 _guns[i].Init(this);
             }
             EquipGun(0);
+            ShootersManager.Instance.RegisterShooter(this);
         }
 
         private void InitializeStates()
