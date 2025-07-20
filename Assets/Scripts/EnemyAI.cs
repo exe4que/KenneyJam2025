@@ -298,7 +298,8 @@ namespace KenneyJam2025
             _rigidbody.constraints = RigidbodyConstraints.None;
             //add explosion force
             Vector3 randomPosition = transform.position + Random.insideUnitSphere;
-            _rigidbody.AddExplosionForce(100f, randomPosition, 5f);
+            //make it explode
+            _rigidbody.AddExplosionForce(100f, randomPosition, 5f, 1f, ForceMode.Impulse);
         }
 
         private void CheckCriticalHealth()
