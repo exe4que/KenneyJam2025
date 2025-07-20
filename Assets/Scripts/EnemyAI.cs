@@ -99,8 +99,9 @@ namespace KenneyJam2025
                 Die(null);
                 return;
             }
+            if (this == null || !_isAlive) return;
             UpdateStateMachine();
-
+            if (this == null || !_isAlive) return;
             if (Time.time > _nextTimeSpecialBullet)
             {
                 _equipedGun.ShootSpecialBullet();
@@ -364,7 +365,21 @@ namespace KenneyJam2025
             throw new NotImplementedException();
         }
 
-        public Vector3 Position => transform.position;
+        public Vector3 Position
+        {
+            get
+            {
+                try
+                {
+                    return transform.position;
+                }
+                catch (Exception e)
+                {
+                    return Vector3.zero;
+                }
+            }
+        }
+
         public GameObject GameObject => gameObject;
         public float ImprecisionNoise => _shootingImprecisionNoise;
         public int WeaponIndex { get; set; }
