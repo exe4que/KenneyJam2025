@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: e344bc4bd94b6f84189b3f4f4fa8dbed
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
@@ -20,9 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InGameUI.unity
     guid: 80a1c3b91eb49e547a2dc064e665cfd8
-  - enabled: 1
-    path: Assets/Scenes/MenuScene.unity
-    guid: e344bc4bd94b6f84189b3f4f4fa8dbed
   - enabled: 1
     path: Assets/Scenes/ReloadLevel.unity
     guid: 61df29de1d885084a97369de83d90d58
