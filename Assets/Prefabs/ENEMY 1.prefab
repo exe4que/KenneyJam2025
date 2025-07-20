@@ -936,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da7c42130bc0408981efb64e0b0e1f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 130
   _detectionRange: 10
   _targetSwithchingRange: 3
   _patrollingRange: 4
