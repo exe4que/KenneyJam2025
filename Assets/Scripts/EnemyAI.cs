@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEditor;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -40,7 +41,25 @@ namespace KenneyJam2025
         private bool _isAlive = true; // Flag to check if the AI is alive
         
         private float currentHealth;
+        private float _nextTimeSpecialBullet = 0f; // Time to wait before shooting a special bullet
+
+        private void OnEnable()
+        {
+            GlobalEvents.GunUpgraded += OnGunUpgraded;
+        }
         
+        private void OnDisable()
+        {
+            GlobalEvents.GunUpgraded -= OnGunUpgraded;
+        }
+        
+        private void OnGunUpgraded(IShooter shooter, int index)
+        {
+            if (shooter != this) return;
+            EquipGun(index);
+            Debug.Log($"{this.gameObject.name}: Gun upgraded to index: {index}".Color(Color.green));
+        }
+
         private void Start()
         {
             _animator.SetFloat("Run", 1f);
@@ -57,6 +76,8 @@ namespace KenneyJam2025
             }
             EquipGun(0);
             ShootersManager.Instance.RegisterShooter(this);
+            float timerDuration = GameManager.Instance.CurrentLevelSettings.TimerDuration;
+            _nextTimeSpecialBullet = Time.time + Random.Range(timerDuration, timerDuration * 2f); // Randomize initial special bullet time
         }
 
         private void InitializeStates()
@@ -70,14 +91,22 @@ namespace KenneyJam2025
 
         private void Update()
         {
-            if (!_isAlive) return; // If AI is not alive, skip updates
+            if (this == null || !_isAlive) return; // If AI is not alive, skip updates
             if (GameManager.Instance.GameOver) return;
             if (this.transform.position.y < -6f)
             {
                 // If the player falls below a certain height, they die
                 Die(null);
+                return;
             }
             UpdateStateMachine();
+
+            if (Time.time > _nextTimeSpecialBullet)
+            {
+                _equipedGun.ShootSpecialBullet();
+                _nextTimeSpecialBullet = Time.time + Random.Range(GameManager.Instance.CurrentLevelSettings.TimerDuration, 
+                    GameManager.Instance.CurrentLevelSettings.TimerDuration * 2f); // Randomize next special bullet time
+            }
         }
 
         private void UpdateStateMachine()
@@ -338,6 +367,7 @@ namespace KenneyJam2025
         public Vector3 Position => transform.position;
         public GameObject GameObject => gameObject;
         public float ImprecisionNoise => _shootingImprecisionNoise;
+        public int WeaponIndex { get; set; }
 
         public void EquipGun(int index)
         {
@@ -355,6 +385,7 @@ namespace KenneyJam2025
             _equipedGun = _guns[index];
             _equipedGun.Equip(); // Equip the new gun
             Debug.Log($"Equipped gun: {_equipedGun.name}");
+            WeaponIndex = index;
         }
 
         public void StartShooting()
