@@ -246,6 +246,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 29.390991
       objectReference: {fileID: 0}
+    - target: {fileID: 3046217332337762658, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110310372334460194, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110310372334460194, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110310372334460194, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8382999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110310372334460194, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110310372334460194, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278245119
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110310372334460194, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3828278100920252297, guid: 6ade1eae5286ddd41827c710fa6a245b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.70832

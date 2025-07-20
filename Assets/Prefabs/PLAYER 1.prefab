@@ -49,7 +49,7 @@ MonoBehaviour:
   Range: 7
   AngleSpread: 40
   PelletCount: 5
-  RecoilForce: 5
+  RecoilForce: 3
 --- !u!1 &1134020914527079481
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   Damage: 3
   FireRate: 20
   Range: 20
-  RecoilForce: 1
+  RecoilForce: 0.6
 --- !u!1001 &9027121881276574914
 PrefabInstance:
   m_ObjectHideFlags: 0
