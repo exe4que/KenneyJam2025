@@ -25,8 +25,8 @@ namespace KenneyJam2025
         [SerializeField] private TMP_Text _debugText;
         [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private Gun EquipedGun;
-        [SerializeField] private Gun[] Guns;
+        [SerializeField] private Gun _equipedGun;
+        [SerializeField] private Gun[] _guns;
         
         private AIState _currentState;
         private AIState SearchingForTargetState;
@@ -42,6 +42,16 @@ namespace KenneyJam2025
         private void Start()
         {
             InitializeStates();
+            if (_guns.Length == 0)
+            {
+                Debug.LogError("No guns assigned to PlayerShooting.");
+                return;
+            }
+
+            for (int i = 0; i < _guns.Length; i++)
+            {
+                _guns[i].Init(this);
+            }
             EquipGun(0);
         }
 
@@ -312,42 +322,42 @@ namespace KenneyJam2025
         
         public void EquipGun(int index)
         {
-            if (index < 0 || index >= Guns.Length)
+            if (index < 0 || index >= _guns.Length)
             {
                 Debug.LogError($"Invalid gun index: {index}. Cannot equip gun.");
                 return;
             }
 
-            if (EquipedGun != null)
+            if (_equipedGun != null)
             {
-                EquipedGun.StopShooting(); // Stop the current gun before switching
+                _equipedGun.StopShooting(); // Stop the current gun before switching
             }
 
-            EquipedGun = Guns[index];
-            EquipedGun.Equip(); // Equip the new gun
-            Debug.Log($"Equipped gun: {EquipedGun.name}");
+            _equipedGun = _guns[index];
+            _equipedGun.Equip(); // Equip the new gun
+            Debug.Log($"Equipped gun: {_equipedGun.name}");
         }
 
         public void StartShooting()
         {
-            if (EquipedGun == null)
+            if (_equipedGun == null)
             {
                 Debug.LogError("No gun equipped. Cannot start shooting.");
                 return;
             }
 
-            EquipedGun.StartShooting();
+            _equipedGun.StartShooting();
         }
 
         public void StopShooting()
         {
-            if (EquipedGun == null)
+            if (_equipedGun == null)
             {
                 Debug.LogError("No gun equipped. Cannot stop shooting.");
                 return;
             }
 
-            EquipedGun.StopShooting();
+            _equipedGun.StopShooting();
         }
 
         public void OnSomethingDamaged(IDamageable target, float damage)
