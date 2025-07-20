@@ -65,7 +65,7 @@ namespace KenneyJam2025
                             bullet.Shooter.OnSomethingDamaged(damageable, bullet.Damage);
                             if (bullet.IsSpecial)
                             {
-                                GameManager.Instance.OnSpecialBulletHit();
+                                GameManager.Instance.OnSpecialBulletHit(bullet.Shooter);
                             }
                         }
                     }
