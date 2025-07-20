@@ -213,6 +213,8 @@ MonoBehaviour:
   _shootingSpeedMultiplier: 0.4
   _guns:
   - {fileID: 9011721243526949606}
+  - {fileID: 9011721243526949606}
+  - {fileID: 9011721243526949606}
 --- !u!114 &7860027769384662025
 MonoBehaviour:
   m_ObjectHideFlags: 0
