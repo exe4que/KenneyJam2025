@@ -16,9 +16,19 @@ public class SoundManager : MonoBehaviour
      public SoundFX ShotFired;
      public SoundFX SomethingDamaged;
      public SoundFX PlayerDied;
-
+    public static SoundManager Instance => _instance;
+    private static SoundManager _instance;
      void Awake()
      {
+          if (Instance != null && Instance != this)
+          {
+               Destroy(gameObject);
+               return;
+          }
+
+          _instance = this;
+
+
           var audioSources = GetComponents<AudioSource>(); //Sets an array of sources 
 
           if (audioSources.Length < 2)
