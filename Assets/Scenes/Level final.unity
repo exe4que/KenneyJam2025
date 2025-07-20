@@ -1325,6 +1325,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5890532045270862624, guid: aa043a758583a70548c4de2a8e90a1d5, type: 3}
   m_PrefabInstance: {fileID: 748715349}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &752089037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4855590694479797842, guid: 7d23aa4d797ffe446b52cfde3d6d8c81, type: 3}
+  m_PrefabInstance: {fileID: 968647282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &813147603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1630,13 +1635,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4855590694479797842, guid: 7d23aa4d797ffe446b52cfde3d6d8c81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 968647284}
   m_SourcePrefab: {fileID: 100100000, guid: 7d23aa4d797ffe446b52cfde3d6d8c81, type: 3}
 --- !u!4 &968647283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7076726735165793954, guid: 7d23aa4d797ffe446b52cfde3d6d8c81, type: 3}
   m_PrefabInstance: {fileID: 968647282}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &968647284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752089037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e2547a65f3a6c4a9a8906219e7e299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 0}
+  _isTriggeredByDeath: 0
 --- !u!1 &1167039559
 GameObject:
   m_ObjectHideFlags: 0
@@ -6387,20 +6409,16 @@ PrefabInstance:
       value: vfx_DeathExplosion
       objectReference: {fileID: 0}
     - target: {fileID: 1419211464138712984, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: playOnAwake
+      propertyPath: CustomDataModule.vector0_2.maxCurve.m_Curve.Array.data[0].time
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1431441092097287052, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1449515798560461825, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: isTriggeredByDeath
-      value: 1
+    - target: {fileID: 1419211464138712984, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
+      propertyPath: CustomDataModule.vector0_2.maxCurve.m_Curve.Array.data[0].value
+      value: -0.09576416
       objectReference: {fileID: 0}
     - target: {fileID: 5348899701076487952, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: playOnAwake
-      value: 0
+      propertyPath: CustomDataModule.vector0_2.maxCurve.m_Curve.Array.data[0].value
+      value: -0.09576416
       objectReference: {fileID: 0}
     - target: {fileID: 5627501647693415910, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6442,21 +6460,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6455137008603326814, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: playOnAwake
-      value: 0
+    - target: {fileID: 7804574279853374620, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
+      propertyPath: CustomDataModule.vector0_2.maxCurve.m_Curve.Array.data[0].value
+      value: -0.09576416
       objectReference: {fileID: 0}
     - target: {fileID: 7804574279853374620, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: playOnAwake
-      value: 0
+      propertyPath: CustomDataModule.vector0_2.maxCurve.m_Curve.Array.data[0].inSlope
+      value: 3.3624578
       objectReference: {fileID: 0}
-    - target: {fileID: 8484821554611118391, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: playOnAwake
-      value: 0
+    - target: {fileID: 7804574279853374620, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
+      propertyPath: CustomDataModule.vector0_2.maxCurve.m_Curve.Array.data[0].outSlope
+      value: 3.3624578
       objectReference: {fileID: 0}
-    - target: {fileID: 8504084311908804658, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
-      propertyPath: playOnAwake
-      value: 0
+    - target: {fileID: 7804574279853374620, guid: fce4edee00a65c248a639713aa3ccf92, type: 3}
+      propertyPath: CustomDataModule.vector0_2.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.07958478
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -16,30 +16,18 @@ namespace KenneyJam2025
 
         
         [SerializeField] private Gun[] _guns;
-        [SerializeField] private GameObject[] _visualGuns;
-
-        [SerializeField] private InputActionReference _Gun0Action;
-        [SerializeField] private InputActionReference _Gun1Action;
-        [SerializeField] private InputActionReference _Gun2Action;
 
 
         private void OnEnable()
         {
             GlobalEvents.UpgradeGunWindowActivated += OnUpgradeGunWindowActivated;
             GlobalEvents.GunUpgraded += OnGunUpgraded;
-            GlobalEvents.PlayerDied += OnPlayerDied;
         }
         
         private void OnDisable()
         {
             GlobalEvents.UpgradeGunWindowActivated -= OnUpgradeGunWindowActivated;
             GlobalEvents.GunUpgraded -= OnGunUpgraded;
-            GlobalEvents.PlayerDied -= OnPlayerDied;
-        }
-
-        private void OnPlayerDied()
-        {
-            ShootersManager.Instance.UnregisterShooter(this);
         }
 
         private void OnGunUpgraded(int index)
@@ -81,21 +69,6 @@ namespace KenneyJam2025
             {
                 StopShooting();
             }
-
-            // only for testing purposes, comment out in production
-            if (_Gun0Action != null && _Gun0Action.action.WasPressedThisFrame())
-            {
-                EquipGun(0);
-            }
-            else if (_Gun1Action != null && _Gun1Action.action.WasPressedThisFrame())
-            {
-                EquipGun(1);
-            }
-            else if (_Gun2Action != null && _Gun2Action.action.WasPressedThisFrame())
-            {
-                EquipGun(2);
-            }
-
         }
 
         public string Name
@@ -108,7 +81,6 @@ namespace KenneyJam2025
 
         public Vector3 Position => transform.position;
         public GameObject GameObject => gameObject;
-        public float ImprecisionNoise => 0f;
 
         public void EquipGun(int index)
         {
@@ -125,18 +97,13 @@ namespace KenneyJam2025
 
             _equipedGun = _guns[index];
             _equipedGun.Equip(); 
-            
-            for (int i = 0; i < _visualGuns.Length; i++)
-            {
-                _visualGuns[i].SetActive(i == index);
-            }
             Debug.Log($"Equipped gun: {_equipedGun.name}");
         }
 
         public void StartShooting()
         {
             _equipedGun.StartShooting();
-            _animator.SetBool("Attack", true);
+            _animator.SetBool("isShooting", true);
             if (_movement != null)
             {
                 _movement.SetSpeedMultiplier(_shootingSpeedMultiplier);
@@ -149,8 +116,8 @@ namespace KenneyJam2025
             if (_movement != null)
                 _movement.SetSpeedMultiplier(1f);
 
-            _animator.SetBool("Attack", false); 
-            //Debug.Log("Dej� de disparar");
+            _animator.SetBool("isShooting", false); 
+            Debug.Log("Dej� de disparar");
         }
 
         public void OnSomethingDamaged(IDamageable target, float damage)
