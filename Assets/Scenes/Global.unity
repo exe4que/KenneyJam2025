@@ -384,7 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletSpeed: 100
   SpecialBulletSpeed: 20
-  SpecialBulletDamage: 100
+  SpecialBulletDamage: 20
 --- !u!1 &1905259613
 GameObject:
   m_ObjectHideFlags: 0

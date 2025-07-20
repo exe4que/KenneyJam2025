@@ -16,6 +16,7 @@ namespace KenneyJam2025
 
         
         [SerializeField] private Gun[] _guns;
+        [SerializeField] private GameObject[] _visualGuns;
 
 
         private void OnEnable()
@@ -69,6 +70,21 @@ namespace KenneyJam2025
             {
                 StopShooting();
             }
+
+            // only for testing purposes, comment out in production
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                EquipGun(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.F2))
+            {
+                EquipGun(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.F3))
+            {
+                EquipGun(2);
+            }
+
         }
 
         public string Name
@@ -97,6 +113,11 @@ namespace KenneyJam2025
 
             _equipedGun = _guns[index];
             _equipedGun.Equip(); 
+            
+            for (int i = 0; i < _visualGuns.Length; i++)
+            {
+                _visualGuns[i].SetActive(i == index);
+            }
             Debug.Log($"Equipped gun: {_equipedGun.name}");
         }
 
