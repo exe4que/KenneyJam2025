@@ -16,7 +16,24 @@ namespace KenneyJam2025
 
         
         [SerializeField] private Gun[] _guns;
+
+
+        private void OnEnable()
+        {
+            GlobalEvents.UpgradeGunWindowActivated += OnUpgradeGunWindowActivated;
+        }
         
+        private void OnDisable()
+        {
+            GlobalEvents.UpgradeGunWindowActivated -= OnUpgradeGunWindowActivated;
+        }
+
+        private void OnUpgradeGunWindowActivated(int index)
+        {
+            _equipedGun.ShootSpecialBullet();
+        }
+
+
         private void Start()
         {
             if (_guns.Length == 0)

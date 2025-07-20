@@ -7,5 +7,6 @@ namespace KenneyJam2025
         public static Action<IShooter> ShotFired;
         public static Action<IShooter, IDamageable, float> SomethingDamaged;
         public static Action PlayerDied;
+        public static Action<int> UpgradeGunWindowActivated;
     }
 }
