@@ -27,6 +27,8 @@ namespace KenneyJam2025
             Debug.Log($"Player damaged by {damage}. Current health: {currentHealth}");
             GlobalEvents.SomethingDamaged?.Invoke(shooter, this, damage);
             if (currentHealth <= 0)
+                
+                
             {
                 Die(shooter);
             }
