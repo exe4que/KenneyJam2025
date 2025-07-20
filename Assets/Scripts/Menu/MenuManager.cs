@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using KenneyJam2025;
 public class MenuManager : MonoBehaviour
 {
 
@@ -13,19 +14,22 @@ public class MenuManager : MonoBehaviour
 
     public GameObject CreditsPanel;
 
-    private bool canClick = true; //To check if a button was clicked or not
+    private bool _canClick = true; //To check if a button was clicked or not
 
+    [SerializeField] private string _mainScene;  //Scenes that get assigned in the inspectorr
+    [SerializeField] private List<string> _scenesAdditive = new List<string>();
     
+
 
     void Start()
     {
-        canClick = true;
+        _canClick = true;
     }
 
     public void PlayAction()
     {
-        if (!canClick) return;
-        canClick = false;
+        if (!_canClick) return;
+        _canClick = false;
 
         if (_transitionAnim != null)
         {
@@ -48,16 +52,22 @@ public class MenuManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);  //Changes to next scene 
-        canClick = true;
+        //Load mainScene
+
+        SceneManager.LoadScene(_mainScene);
+
+        //Load Additive scenes 
+                    GlobalEvents.OnSceneChangeRequested?.Invoke("MainLevel", _scenesAdditive);
+
+        _canClick = true;
 
     }
 
 
     public void ExitAction()
     {
-        if (!canClick) return;
-        canClick = false;
+        if (!_canClick) return;
+        _canClick = false;
 
         StartCoroutine(ExitAfter(_delayBeforeExit));
     }
@@ -66,14 +76,14 @@ public class MenuManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Application.Quit(); //exits aplication
-        canClick = true;
+        _canClick = true;
 
     }
 
     public void CreditsAction()
     {
-        if (!canClick) return;
-        canClick = false;
+        if (!_canClick) return;
+        _canClick = false;
 
         StartCoroutine(CreditsAfter(_delayBeforeCredits));
     }
@@ -82,13 +92,13 @@ public class MenuManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         CreditsPanel.SetActive(true);
-        canClick = true;
+        _canClick = true;
 
     }
     public void CloseCredits()
     {
         CreditsPanel.SetActive(false);
-        canClick = true;
+        _canClick = true;
 
     }
 

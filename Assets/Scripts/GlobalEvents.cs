@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 namespace KenneyJam2025
 {
     public static class GlobalEvents
@@ -9,5 +9,7 @@ namespace KenneyJam2025
         public static Action PlayerDied;
         public static Action<int> UpgradeGunWindowActivated;
         public static Action<int> GunUpgraded;
+        public static Action<string, List<string>> OnSceneChangeRequested;
+
     }
 }
