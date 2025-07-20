@@ -47,3 +47,5 @@ MonoBehaviour:
   _poolItems:
   - Prefab: {fileID: 2296005608749743692, guid: 76ad57693fdf22e4b967997dcc3d6566, type: 3}
     InitialSize: 300
+  - Prefab: {fileID: 2296005608749743692, guid: 6a020d0175793714a964eb62bcd18951, type: 3}
+    InitialSize: 20

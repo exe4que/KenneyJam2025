@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7860027769384662025}
   m_Layer: 0
   m_Name: PLAYER 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2801415621611719319}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.51, y: 0.5, z: -13.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   _movement: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _mouseLook: {fileID: -7203719822769119064, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _rigidbody: {fileID: 8432712867367638147}
+  _animator: {fileID: 126790842225861321}
   _speed: 9
 --- !u!114 &6231971703621339966
 MonoBehaviour:
@@ -206,8 +207,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  EquipedGun: {fileID: 0}
-  Guns:
+  _equipedGun: {fileID: 9011721243526949606}
+  _animator: {fileID: 126790842225861321}
+  _movement: {fileID: 563757719113892756}
+  _shootingSpeedMultiplier: 0.4
+  _guns:
   - {fileID: 9011721243526949606}
 --- !u!114 &7860027769384662025
 MonoBehaviour:
@@ -442,6 +446,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d80794b8f5e30554b897ccb62ba0dd7f, type: 3}
+--- !u!95 &126790842225861321 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8972494392430448139, guid: d80794b8f5e30554b897ccb62ba0dd7f, type: 3}
+  m_PrefabInstance: {fileID: 9027121881276574914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6278685618630883507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3054734432419026033, guid: d80794b8f5e30554b897ccb62ba0dd7f, type: 3}

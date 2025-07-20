@@ -32,7 +32,14 @@ namespace KenneyJam2025
             _isShooting = false;
             Debug.Log("Stopped shooting with PistolGun");
         }
-        
+
+        public override void ShootSpecialBullet()
+        {
+            Ray shootRay = new Ray(this.transform.position, this.transform.forward);
+            // Call the shooting manager to handle the bullet logic
+            ShootingManager.Instance.Shoot(shootRay, Range, ShootingManager.Instance.SpecialBulletDamage, _shooter, "BulletSpecialPrefab", true);
+        }
+
         private void FixedUpdate()
         {
             if (Time.time - _lastFireTime >= FireRate)
@@ -44,7 +51,7 @@ namespace KenneyJam2025
                 {
                     Ray shootRay = new Ray(this.transform.position, this.transform.forward);
                     // Call the shooting manager to handle the bullet logic
-                    ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter);
+                    ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter, "BulletPrefab", true);
                 }
             }
         }
