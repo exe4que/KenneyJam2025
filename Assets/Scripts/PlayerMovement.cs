@@ -68,7 +68,7 @@ namespace KenneyJam2025
                 _rigidbody.rotation = Quaternion.LookRotation(directionToMouse, Vector3.up);
             }
             _animator.SetFloat("Speed", moveDirection.magnitude * _speedMultiplier);
-            Debug.Log($"Speed: {moveDirection.magnitude:F2} | IsShooting: {_animator.GetBool("IsShooting")}");
+            //Debug.Log($"Speed: {moveDirection.magnitude:F2} | IsShooting: {_animator.GetBool("IsShooting")}");
         }
 
         public void SetSpeedMultiplier(float multiplier)

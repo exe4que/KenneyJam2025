@@ -43,7 +43,7 @@ namespace KenneyJam2025
                 {
                     GameObject instance = queue.Dequeue();
                     instance.SetActive(true);
-                    Debug.Log($"Retrieved instance from pool: {prefabName}");
+                    //Debug.Log($"Retrieved instance from pool: {prefabName}");
                     return instance;
                 }
                 else
@@ -55,7 +55,7 @@ namespace KenneyJam2025
                             GameObject newInstance = Instantiate(_poolItems[i].Prefab);
                             newInstance.SetActive(true);
                             _instances[prefabName].Enqueue(newInstance);
-                            Debug.Log($"Created new instance for pool: {prefabName}");
+                            //Debug.Log($"Created new instance for pool: {prefabName}");
                             return newInstance;
                         }
                     }

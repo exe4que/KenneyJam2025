@@ -117,7 +117,7 @@ namespace KenneyJam2025
                 _movement.SetSpeedMultiplier(1f);
 
             _animator.SetBool("isShooting", false); 
-            Debug.Log("Dejó de disparar");
+            //Debug.Log("Dejï¿½ de disparar");
         }
 
         public void OnSomethingDamaged(IDamageable target, float damage)

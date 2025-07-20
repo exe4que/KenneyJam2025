@@ -30,7 +30,7 @@ namespace KenneyJam2025
             
             _lineRenderer.transform.position = _bullet.Trajectory.origin;
             _lineRenderer.transform.rotation = Quaternion.LookRotation(_bullet.Trajectory.direction, Vector3.up);
-            Debug.Log("Bullet fired!");
+            //Debug.Log("Bullet fired!");
             GlobalEvents.ShotFired?.Invoke(_bullet.Shooter);
         }
 
@@ -75,7 +75,7 @@ namespace KenneyJam2025
             _impactDistance = impactDistance;
             this.DelayedCallInSeconds(() =>
             {
-                Debug.Log($"Returning bullet to pool. Impacted: {impacted}");
+                //Debug.Log($"Returning bullet to pool. Impacted: {impacted}");
                 _bullet = null;
                 PoolManager.Instance.ReturnInstance(this.gameObject);
             }, 1);
