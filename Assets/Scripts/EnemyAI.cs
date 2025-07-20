@@ -20,6 +20,7 @@ namespace KenneyJam2025
         [SerializeField] private float _criticalHealthThreshold = 20f; // Health threshold to consider critical
         [SerializeField][Range(0f,1f)] private float _changeOfFlyingSceneAtCriticalHealth = 0.5f; // Chance to switch to flying state at critical health
         [SerializeField] private Vector2 _flySceneDistanceRange = new Vector2(5f, 10f); // Range for flying distance from the target
+        [SerializeField] private float _shootingImprecisionNoise = 0.3f;
         
         [Header("References")]
         [SerializeField] private TMP_Text _debugText;
@@ -202,9 +203,6 @@ namespace KenneyJam2025
                 else
                 {
                     Vector3 directionToTarget = (_targetShooter.Position - transform.position).normalized;
-                    //add some noise to the direction
-                    directionToTarget += Random.insideUnitSphere * 0.1f;
-                    directionToTarget.y = 0; // Keep it horizontal
                     transform.rotation = Quaternion.LookRotation(directionToTarget);
                 }
             }
@@ -309,7 +307,9 @@ namespace KenneyJam2025
             Vector3 randomPosition = transform.position + Random.insideUnitSphere;
             //make it explode
             _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
-
+            currentHealth = 0f; // Set health to zero
+            ShootersManager.Instance.UnregisterShooter(this); // Unregister from the shooters manager
+            
             this.DelayedCallInSeconds(() =>
             {
                 Destroy(this.gameObject);
@@ -334,7 +334,8 @@ namespace KenneyJam2025
 
         public Vector3 Position => transform.position;
         public GameObject GameObject => gameObject;
-        
+        public float ImprecisionNoise => _shootingImprecisionNoise;
+
         public void EquipGun(int index)
         {
             if (index < 0 || index >= _guns.Length)
