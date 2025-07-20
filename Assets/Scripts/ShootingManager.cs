@@ -53,11 +53,16 @@ namespace KenneyJam2025
                         if (bullet.Shooter != null)
                         {
                             bullet.Shooter.OnSomethingDamaged(damageable, bullet.Damage);
+                            if (bullet.IsSpecial)
+                            {
+                                GameManager.Instance.OnSpecialBulletHit();
+                            }
                         }
                     }
 
-                    _bullets[i].PhysicalBullet.ReturnToPool(true, Vector3.Distance(bullet.Trajectory.origin, hitInfo.point));
-                    _bullets.RemoveAt(i);
+                    bullet.PhysicalBullet.ReturnToPool(true, Vector3.Distance(bullet.Trajectory.origin, hitInfo.point));
+                    _bullets.Remove(bullet);
+                    GameManager.Instance.OnSpecialBulletMiss();
                 }
                 
                 if (reachedMaxRange)

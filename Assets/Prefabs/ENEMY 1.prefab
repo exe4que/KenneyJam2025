@@ -460,7 +460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598648437320549428}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9980455, z: -0, w: 0.06249167}
+  m_LocalRotation: {x: 0, y: 0.9980454, z: 0, w: 0.062494434}
   m_LocalPosition: {x: 4.14, y: 0.5, z: 11.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -575,6 +575,8 @@ MonoBehaviour:
   _rigidbody: {fileID: 7604682372702626271}
   _equipedGun: {fileID: 0}
   _guns:
+  - {fileID: 2511775270720670956}
+  - {fileID: 2511775270720670956}
   - {fileID: 2511775270720670956}
 --- !u!1 &1799153525405805705
 GameObject:
