@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 4
-  FireRate: 1
+  FireRate: 2
   Range: 7
   AngleSpread: 40
   PelletCount: 5
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 10
-  FireRate: 1
+  FireRate: 4
   Range: 20
 --- !u!1 &2008690587740511755
 GameObject:
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 3
-  FireRate: 15
+  FireRate: 20
   Range: 20
   RecoilForce: 1
 --- !u!1001 &9027121881276574914
