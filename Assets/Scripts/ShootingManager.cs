@@ -6,8 +6,8 @@ namespace KenneyJam2025
 {
     public class ShootingManager : Singleton<ShootingManager>
     {
-        [SerializeField][Range(0,200)] private float _bulletSpeed = 50f;
-        [SerializeField][Range(0,200)] private float _specialBulletSpeed = 25f;
+        [Range(0,200)] public float BulletSpeed = 50f;
+        [Range(0,200)] public float SpecialBulletSpeed = 25f;
         private List<Bullet> _bullets = new List<Bullet>();
         
         public void Shoot(Ray trajectory, float maxRange, float damage, IShooter shooter)
@@ -33,7 +33,7 @@ namespace KenneyJam2025
             {
                 Bullet bullet = _bullets[i];
                 bullet.LastPosition = bullet.Position;
-                bullet.Position += _bulletSpeed * Time.fixedDeltaTime;
+                bullet.Position += BulletSpeed * Time.fixedDeltaTime;
                 bool reachedMaxRange = bullet.Position >= bullet.MaxRange;
                 if (reachedMaxRange)
                 {
@@ -53,13 +53,13 @@ namespace KenneyJam2025
                         }
                     }
 
-                    _bullets[i].PhysicalBullet.ReturnToPool(true);
+                    _bullets[i].PhysicalBullet.ReturnToPool(true, Vector3.Distance(bullet.Trajectory.origin, hitInfo.point));
                     _bullets.RemoveAt(i);
                 }
                 
                 if (reachedMaxRange)
                 {
-                    _bullets[i].PhysicalBullet.ReturnToPool(false);
+                    _bullets[i].PhysicalBullet.ReturnToPool(false, 0);
                     _bullets.RemoveAt(i);
                 }
             }
