@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6342f3e854ed4c4e93752323065802e, type: 3}
   m_Name: PlayerDeath
   m_EditorClassIdentifier: 
-  Clip: {fileID: 0}
+  Clip: {fileID: 8300000, guid: d2bcdde47e95d7848aa8a2b4815d2d2f, type: 3}
   MinVolume: 0.163
   MaxVolume: 1
