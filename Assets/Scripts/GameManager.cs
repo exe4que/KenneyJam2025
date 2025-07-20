@@ -202,6 +202,7 @@ namespace KenneyJam2025
         public void OnSpecialBulletHit()
         {
             GlobalEvents.GunUpgraded.Invoke(_pendingUpgrade);
+            _weaponIndex = _pendingUpgrade;
             _pendingUpgrade = -1;
         }
 
