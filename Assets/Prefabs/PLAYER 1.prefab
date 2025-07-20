@@ -192,6 +192,7 @@ MonoBehaviour:
   _movement: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _mouseLook: {fileID: -7203719822769119064, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _rigidbody: {fileID: 8432712867367638147}
+  _animator: {fileID: 0}
   _speed: 9
 --- !u!114 &6231971703621339966
 MonoBehaviour:
@@ -208,6 +209,8 @@ MonoBehaviour:
   ShootAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   _equipedGun: {fileID: 0}
   _guns:
+  - {fileID: 9011721243526949606}
+  - {fileID: 9011721243526949606}
   - {fileID: 9011721243526949606}
 --- !u!114 &7860027769384662025
 MonoBehaviour:

@@ -15,12 +15,21 @@ namespace KenneyJam2025
         private void OnEnable()
         {
             GlobalEvents.UpgradeGunWindowActivated += OnUpgradeGunWindowActivated;
+            GlobalEvents.GunUpgraded += OnGunUpgraded;
         }
         
         private void OnDisable()
         {
             GlobalEvents.UpgradeGunWindowActivated -= OnUpgradeGunWindowActivated;
+            GlobalEvents.GunUpgraded -= OnGunUpgraded;
         }
+
+        private void OnGunUpgraded(int index)
+        {
+            EquipGun(index);
+            Debug.Log($"Gun upgraded to index: {index}".Color(Color.green));
+        }
+
 
         private void OnUpgradeGunWindowActivated(int index)
         {

@@ -14,9 +14,14 @@ namespace KenneyJam2025
         private float _timeLeft;
         private bool _levelActive = false;
         private int _currentLevelIndex = 0;
+        private bool _upgrade1Open = false;
+        private bool _upgrade2Open = false;
+        private bool _upgrade3Open = false;
+        
         private bool _upgrade1AlreadyActivated = false;
         private bool _upgrade2AlreadyActivated = false;
         private bool _upgrade3AlreadyActivated = false;
+        private int _pendingUpgrade = -1;
         private void Start()
         {
             StartLevel();
@@ -39,46 +44,78 @@ namespace KenneyJam2025
             }
             
             float timeLeftPercentage = _timeLeft / LevelSettings[_currentLevelIndex].TimerDuration;
-            if (UpdradeAction != null && UpdradeAction.action.WasPressedThisFrame())
+            
+            
+            Debug.Log($"Time Left Percentage: {timeLeftPercentage}");
+            if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x &&
+                timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.y)
             {
-                Debug.Log($"Time Left Percentage: {timeLeftPercentage}");
-                if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x &&
-                    timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.y)
+                _upgrade1Open = true;
+                if (_upgrade1AlreadyActivated) return; // Prevent multiple activations
+                if (UpdradeAction != null && UpdradeAction.action.WasPressedThisFrame())
                 {
-                    if (_upgrade1AlreadyActivated) return; // Prevent multiple activations
                     Debug.Log("Upgrade Window 1 Activated");
                     GlobalEvents.UpgradeGunWindowActivated?.Invoke(0);
                     _upgrade1AlreadyActivated = true;
+                    _pendingUpgrade = 1; // Store the pending upgrade index
                 }
-                else if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.x &&
-                         timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.y)
+            }
+            else if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.x &&
+                     timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.y)
+            {
+                _upgrade2Open = true;
+                if (_upgrade2AlreadyActivated) return; // Prevent multiple activations
+                if (UpdradeAction != null && UpdradeAction.action.WasPressedThisFrame())
                 {
-                    if (_upgrade2AlreadyActivated) return; // Prevent multiple activations
                     Debug.Log("Upgrade Window 2 Activated");
-                    GlobalEvents.UpgradeGunWindowActivated?.Invoke(1);
-                    _upgrade2AlreadyActivated = true;
+                GlobalEvents.UpgradeGunWindowActivated?.Invoke(1);
+                _upgrade2AlreadyActivated = true;
+                _pendingUpgrade = 2; // Store the pending upgrade index
                 }
-                else if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.x &&
-                         timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.y)
+                                     
+                                     
+            }
+            else if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.x &&
+                     timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.y)
+            {
+                _upgrade3Open = true;
+                if (_upgrade3AlreadyActivated) return; // Prevent multiple activations
+                if (UpdradeAction != null && UpdradeAction.action.WasPressedThisFrame())
                 {
-                    if (_upgrade3AlreadyActivated) return; // Prevent multiple activations
                     Debug.Log("Upgrade Window 3 Activated");
                     GlobalEvents.UpgradeGunWindowActivated?.Invoke(2);
                     _upgrade3AlreadyActivated = true;
+                    _pendingUpgrade = 2;
                 }
             }
             
+            
             if (timeLeftPercentage < LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x)
             {
+                if (_upgrade1Open && !_upgrade1AlreadyActivated && _weaponIndex > 0)
+                {
+                    GlobalEvents.GunUpgraded?.Invoke(_weaponIndex - 1);
+                }
                 _upgrade1AlreadyActivated = false;
+                _upgrade1Open = false;
             }
             if (timeLeftPercentage < LevelSettings[_currentLevelIndex].UpgradeWindow2Range.x)
             {
+                if (_upgrade2Open && !_upgrade2AlreadyActivated && _weaponIndex > 1)
+                {
+                    GlobalEvents.GunUpgraded?.Invoke(_weaponIndex - 1);
+                }
                 _upgrade2AlreadyActivated = false;
+                _upgrade2Open = false;
             }
             if (timeLeftPercentage < LevelSettings[_currentLevelIndex].UpgradeWindow3Range.x)
             {
+                if (_upgrade3Open && !_upgrade3AlreadyActivated && _weaponIndex > 2)
+                {
+                    GlobalEvents.GunUpgraded?.Invoke(_weaponIndex - 1);
+                }
                 _upgrade3AlreadyActivated = false;
+                _upgrade3Open = false;
             }
         }
 
@@ -99,6 +136,18 @@ namespace KenneyJam2025
                 (settings.UpgradeWindow2Range.y - settings.UpgradeWindow2Range.x) * 200f, 20), "2");
             GUI.Box(new Rect(settings.UpgradeWindow3Range.x * 200f, 70, 
                 (settings.UpgradeWindow3Range.y - settings.UpgradeWindow3Range.x) * 200f, 20), "3");
+        }
+
+        public void OnSpecialBulletHit()
+        {
+            GlobalEvents.GunUpgraded.Invoke(_pendingUpgrade);
+            _pendingUpgrade = -1;
+        }
+
+        public void OnSpecialBulletMiss()
+        {
+            GlobalEvents.GunUpgraded.Invoke(_pendingUpgrade - 1);
+            _pendingUpgrade = -1;
         }
     }
 
