@@ -29,7 +29,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.33, y: 1.5, z: -8.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Length: 5
-  StartThickness: 0
-  EndThickness: 0.3
-  StartColor: {r: 0.48567677, g: 0, b: 1, a: 0}
-  EndColor: {r: 0.4862745, g: 0, b: 1, a: 1}
+  StartThickness: 1
+  EndThickness: 1
+  StartColor: {r: 1, g: 0.68055826, b: 0, a: 0}
+  EndColor: {r: 1, g: 0.48144317, b: 0, a: 1}
   _lineRenderer: {fileID: 3525123275452760062}
