@@ -7,6 +7,8 @@ namespace KenneyJam2025
     {
         private List<IShooter> _shooters = new List<IShooter>();
         
+        public int Count => _shooters.Count;
+        
         public void RegisterShooter(IShooter shooter)
         {
             if (!_shooters.Contains(shooter))
@@ -44,6 +46,14 @@ namespace KenneyJam2025
 
             targetShooter = null;
             return false;
+        }
+
+        public void UnregisterShooter(IShooter shooter)
+        {
+            if (_shooters.Contains(shooter))
+            {
+                _shooters.Remove(shooter);
+            }
         }
     }
 }

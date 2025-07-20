@@ -307,7 +307,9 @@ namespace KenneyJam2025
             Vector3 randomPosition = transform.position + Random.insideUnitSphere;
             //make it explode
             _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
-
+            currentHealth = 0f; // Set health to zero
+            ShootersManager.Instance.UnregisterShooter(this); // Unregister from the shooters manager
+            
             this.DelayedCallInSeconds(() =>
             {
                 Destroy(this.gameObject);
