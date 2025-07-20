@@ -7,7 +7,9 @@ namespace KenneyJam2025
     {
         [SerializeField] private float maxHealth = 100f;
         
-        private float currentHealth;
+     
+        public float currentHealth {get; private set;}
+
         public string Name
         {
             get
