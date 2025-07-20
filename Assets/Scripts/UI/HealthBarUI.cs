@@ -66,7 +66,7 @@ public class PlayerHealthUI : MonoBehaviour
 
         if (_healthSlider != null)
         {
-            _healthSlider.value = 100f;
+            _healthSlider.value = playerHealth.MaxHealth;
         }
      
     }
