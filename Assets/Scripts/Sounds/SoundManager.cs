@@ -60,9 +60,8 @@ public class SoundManager : MonoBehaviour
           }
      }
 
-    private void OnGunUpgraded(IShooter i, int obj)
+    private void OnGunUpgraded(int obj)
     {
-          obj = 3;
           PlayClip(GunUpgraded);
     }
 
