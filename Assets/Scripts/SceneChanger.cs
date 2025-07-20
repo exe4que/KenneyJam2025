@@ -22,13 +22,15 @@ public class SceneChanger : MonoBehaviour
         GlobalEvents.OnSceneChangeRequested -= LoadScenes;
     }
 
+
+    //Recieves the main scene name and the rest additive scenes as a list of strings 
     private void LoadScenes(string mainScene, List<string> additiveScenes)
     {
-        SceneManager.LoadScene(mainScene);  // Carga principal
+        SceneManager.LoadScene(mainScene);  //Loads Main scene
 
         foreach (string scene in additiveScenes)
         {
-            SceneManager.LoadScene(scene, LoadSceneMode.Additive);  // Carga additiva
+            SceneManager.LoadScene(scene, LoadSceneMode.Additive);  //Loads additive scenes 
         }
     }
 }
