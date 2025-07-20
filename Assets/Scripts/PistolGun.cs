@@ -42,7 +42,7 @@ namespace KenneyJam2025
 
         private void FixedUpdate()
         {
-            if (Time.time - _lastFireTime >= FireRate)
+            if (Time.time - _lastFireTime >= 1 / FireRate)
             {
                 // Logic to shoot the gun
                 _lastFireTime = Time.time;

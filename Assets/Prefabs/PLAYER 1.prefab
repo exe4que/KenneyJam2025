@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 887581086946951911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.11, y: 0.526, z: 1.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -128,6 +128,7 @@ Transform:
   m_Children:
   - {fileID: 8550691993696972026}
   - {fileID: 1194614984238526930}
+  - {fileID: 8050146629530227385}
   - {fileID: 7828932332011730897}
   m_Father: {fileID: 7159352368085672411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -265,11 +266,14 @@ MonoBehaviour:
   _guns:
   - {fileID: 9011721243526949606}
   - {fileID: 1616077348279744173}
-  - {fileID: 9011721243526949606}
+  - {fileID: 4946038797830564757}
   _visualGuns:
   - {fileID: 5169516054639679440}
   - {fileID: 5303937261687709670}
   - {fileID: 739235387968968143}
+  _Gun0Action: {fileID: 7328841874683361317, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  _Gun1Action: {fileID: -8784090722623662754, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  _Gun2Action: {fileID: -3014752453264649863, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &7860027769384662025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +426,54 @@ LineRenderer:
   m_UseWorldSpace: 0
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1 &2888839556215929061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8050146629530227385}
+  - component: {fileID: 4946038797830564757}
+  m_Layer: 0
+  m_Name: MachineGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8050146629530227385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888839556215929061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.11, y: 0.526, z: 1.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4559724353409683065}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4946038797830564757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888839556215929061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c593cb70825a4c81a079a88f9966b181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 3
+  FireRate: 15
+  Range: 20
+  RecoilForce: 1
 --- !u!1001 &9027121881276574914
 PrefabInstance:
   m_ObjectHideFlags: 0

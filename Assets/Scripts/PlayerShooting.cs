@@ -18,6 +18,10 @@ namespace KenneyJam2025
         [SerializeField] private Gun[] _guns;
         [SerializeField] private GameObject[] _visualGuns;
 
+        [SerializeField] private InputActionReference _Gun0Action;
+        [SerializeField] private InputActionReference _Gun1Action;
+        [SerializeField] private InputActionReference _Gun2Action;
+
 
         private void OnEnable()
         {
@@ -72,15 +76,15 @@ namespace KenneyJam2025
             }
 
             // only for testing purposes, comment out in production
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (_Gun0Action != null && _Gun0Action.action.WasPressedThisFrame())
             {
                 EquipGun(0);
             }
-            else if (Input.GetKeyDown(KeyCode.F2))
+            else if (_Gun1Action != null && _Gun1Action.action.WasPressedThisFrame())
             {
                 EquipGun(1);
             }
-            else if (Input.GetKeyDown(KeyCode.F3))
+            else if (_Gun2Action != null && _Gun2Action.action.WasPressedThisFrame())
             {
                 EquipGun(2);
             }

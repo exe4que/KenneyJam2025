@@ -67,12 +67,14 @@ namespace KenneyJam2025
                     {
                         GameManager.Instance.OnSpecialBulletMiss();
                     }
+
+                    continue;
                 }
                 
                 if (reachedMaxRange)
                 {
-                    _bullets[i].PhysicalBullet.ReturnToPool(false, 0);
-                    _bullets.RemoveAt(i);
+                    bullet.PhysicalBullet.ReturnToPool(false, 0);
+                    _bullets.Remove(bullet);
                 }
             }
         }
