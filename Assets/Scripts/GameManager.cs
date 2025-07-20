@@ -47,7 +47,7 @@ namespace KenneyJam2025
             
             
             Debug.Log($"Time Left Percentage: {timeLeftPercentage}");
-            if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x &&
+            if (_weaponIndex >= 0 && timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x &&
                 timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.y)
             {
                 _upgrade1Open = true;
@@ -60,7 +60,7 @@ namespace KenneyJam2025
                     _pendingUpgrade = 1; // Store the pending upgrade index
                 }
             }
-            else if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.x &&
+            else if (_weaponIndex >= 1 && timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.x &&
                      timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.y)
             {
                 _upgrade2Open = true;
@@ -75,7 +75,7 @@ namespace KenneyJam2025
                                      
                                      
             }
-            else if (timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.x &&
+            else if (_weaponIndex == 2 && timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.x &&
                      timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.y)
             {
                 _upgrade3Open = true;
