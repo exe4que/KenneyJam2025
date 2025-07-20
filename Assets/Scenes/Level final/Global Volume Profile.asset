@@ -139,7 +139,7 @@ MonoBehaviour:
     dimension: 1
   contribution:
     m_OverrideState: 1
-    m_Value: 0.603
+    m_Value: 1
 --- !u!114 &8372303702971708986
 MonoBehaviour:
   m_ObjectHideFlags: 3
