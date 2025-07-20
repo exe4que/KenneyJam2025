@@ -67,6 +67,12 @@ namespace KenneyJam2025
         private void Update()
         {
             if (!_isAlive) return; // If AI is not alive, skip updates
+            if (GameManager.Instance.GameOver) return;
+            if (this.transform.position.y < -6f)
+            {
+                // If the player falls below a certain height, they die
+                Die(null);
+            }
             UpdateStateMachine();
         }
 
@@ -196,6 +202,9 @@ namespace KenneyJam2025
                 else
                 {
                     Vector3 directionToTarget = (_targetShooter.Position - transform.position).normalized;
+                    //add some noise to the direction
+                    directionToTarget += Random.insideUnitSphere * 0.1f;
+                    directionToTarget.y = 0; // Keep it horizontal
                     transform.rotation = Quaternion.LookRotation(directionToTarget);
                 }
             }
@@ -300,6 +309,11 @@ namespace KenneyJam2025
             Vector3 randomPosition = transform.position + Random.insideUnitSphere;
             //make it explode
             _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
+
+            this.DelayedCallInSeconds(() =>
+            {
+                Destroy(this.gameObject);
+            }, 2);
         }
 
         private void CheckCriticalHealth()
