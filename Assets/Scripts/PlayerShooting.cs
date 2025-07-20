@@ -42,8 +42,9 @@ namespace KenneyJam2025
             ShootersManager.Instance.UnregisterShooter(this);
         }
 
-        private void OnGunUpgraded(int index)
+        private void OnGunUpgraded(IShooter shooter, int index)
         {
+            if (shooter != this) return;
             EquipGun(index);
             Debug.Log($"Gun upgraded to index: {index}".Color(Color.green));
         }
@@ -109,6 +110,7 @@ namespace KenneyJam2025
         public Vector3 Position => transform.position;
         public GameObject GameObject => gameObject;
         public float ImprecisionNoise => 0f;
+        public int WeaponIndex { get; set; }
 
         public void EquipGun(int index)
         {
@@ -131,6 +133,7 @@ namespace KenneyJam2025
                 _visualGuns[i].SetActive(i == index);
             }
             Debug.Log($"Equipped gun: {_equipedGun.name}");
+            WeaponIndex = index;
         }
 
         public void StartShooting()

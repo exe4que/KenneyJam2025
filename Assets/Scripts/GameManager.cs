@@ -235,11 +235,20 @@ namespace KenneyJam2025
             
         }
 
-        public void OnSpecialBulletHit()
+        public void OnSpecialBulletHit(IShooter shooter)
         {
-            GlobalEvents.GunUpgraded.Invoke(_pendingUpgrade);
-            _weaponIndex = _pendingUpgrade;
-            _pendingUpgrade = -1;
+            if (shooter as PlayerShooting != null)
+            {
+                GlobalEvents.GunUpgraded.Invoke(shooter, _pendingUpgrade);
+                _weaponIndex = _pendingUpgrade;
+                _pendingUpgrade = -1;
+            }
+            else
+            {
+                GlobalEvents.GunUpgraded.Invoke(shooter, Math.Min(shooter.WeaponIndex, 2));
+            }
+            
+            
         }
 
         public void OnSpecialBulletMiss()
