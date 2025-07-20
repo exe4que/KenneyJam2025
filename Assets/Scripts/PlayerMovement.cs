@@ -61,7 +61,7 @@ namespace KenneyJam2025
                 }
             }
         }
-
+        
         private void FixedUpdate()
         {
             if (GameManager.Instance.GameOver) return;

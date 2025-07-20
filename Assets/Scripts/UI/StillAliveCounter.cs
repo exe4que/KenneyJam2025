@@ -8,12 +8,7 @@ namespace KenneyJam2025.UI
     {
         [SerializeField] private TMP_Text _counterText;
 
-        private void OnEnable()
-        {
-            
-        }
-
-        private void Start()
+        private void Update()
         {
             int count = ShootersManager.Instance.Count;
             _counterText.text = $"STILL ALIVE: {count.ToString("D2")}";
