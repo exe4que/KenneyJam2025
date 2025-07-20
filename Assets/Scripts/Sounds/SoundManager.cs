@@ -1,3 +1,4 @@
+using System;
 using KenneyJam2025;
 using UnityEngine;
 
@@ -16,8 +17,11 @@ public class SoundManager : MonoBehaviour
      public SoundFX ShotFired;
      public SoundFX SomethingDamaged;
      public SoundFX PlayerDied;
-    public static SoundManager Instance => _instance;
-    private static SoundManager _instance;
+     public SoundFX GunUpgraded;
+
+
+     public static SoundManager Instance => _instance;
+     private static SoundManager _instance;
      void Awake()
      {
           if (Instance != null && Instance != this)
@@ -46,6 +50,7 @@ public class SoundManager : MonoBehaviour
           GlobalEvents.ShotFired += OnShotFired;
           GlobalEvents.SomethingDamaged += OnSomethingDamaged;
           GlobalEvents.PlayerDied += OnPlayerDied;
+          GlobalEvents.GunUpgraded += OnGunUpgraded;
 
           // If it has, it reproduces music
           if (_sceneMusic != null)
@@ -54,7 +59,13 @@ public class SoundManager : MonoBehaviour
                _musicSource.Play();
           }
      }
-     private void OnShotFired(IShooter shooter)
+
+    private void OnGunUpgraded(IShooter shooter, int level)
+    {
+        PlayClip(GunUpgraded);
+    }
+
+    private void OnShotFired(IShooter shooter)
      {
           PlayClip(ShotFired);
      }
