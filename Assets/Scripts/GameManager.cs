@@ -22,6 +22,34 @@ namespace KenneyJam2025
         private bool _upgrade2AlreadyActivated = false;
         private bool _upgrade3AlreadyActivated = false;
         private int _pendingUpgrade = -1;
+        private bool _gameOver = false;
+        
+        public bool GameOver => _gameOver;
+
+        private void OnEnable()
+        {
+            GlobalEvents.PlayerDied += OnPlayerDied;
+        }
+        
+        private void OnDisable()
+        {
+            GlobalEvents.PlayerDied -= OnPlayerDied;
+        }
+        
+        private void OnPlayerDied()
+        {
+            _levelActive = false;
+            _upgrade1Open = false;
+            _upgrade2Open = false;
+            _upgrade3Open = false;
+            _upgrade1AlreadyActivated = false;
+            _upgrade2AlreadyActivated = false;
+            _upgrade3AlreadyActivated = false;
+            _weaponIndex = 0;
+            _pendingUpgrade = -1;
+            _gameOver = true;
+        }
+
         private void Start()
         {
             StartLevel();

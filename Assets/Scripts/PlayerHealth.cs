@@ -21,14 +21,21 @@ namespace KenneyJam2025
             currentHealth = maxHealth;
         }
 
+        private void Update()
+        {
+            if (this.transform.position.y < -6f)
+            {
+                // If the player falls below a certain height, they die
+                Die(null);
+            }
+        }
+
         public void OnDamage(float damage, IShooter shooter)
         {
             currentHealth -= damage;
             Debug.Log($"Player damaged by {damage}. Current health: {currentHealth}");
             GlobalEvents.SomethingDamaged?.Invoke(shooter, this, damage);
             if (currentHealth <= 0)
-                
-                
             {
                 Die(shooter);
             }
@@ -36,6 +43,7 @@ namespace KenneyJam2025
 
         public void Die(IShooter shooter)
         {
+            currentHealth = 0f;
             GlobalEvents.PlayerDied?.Invoke();
             Debug.Log("Player has died.");
         }
