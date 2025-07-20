@@ -62,7 +62,10 @@ namespace KenneyJam2025
 
                     bullet.PhysicalBullet.ReturnToPool(true, Vector3.Distance(bullet.Trajectory.origin, hitInfo.point));
                     _bullets.Remove(bullet);
-                    GameManager.Instance.OnSpecialBulletMiss();
+                    if (bullet.IsSpecial)
+                    {
+                        GameManager.Instance.OnSpecialBulletMiss();
+                    }
                 }
                 
                 if (reachedMaxRange)

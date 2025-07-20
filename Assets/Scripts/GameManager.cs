@@ -31,6 +31,7 @@ namespace KenneyJam2025
         {
             _levelActive = true;
             _timeLeft = LevelSettings[_currentLevelIndex].TimerDuration;
+            _weaponIndex = 0;
         }
 
         private void Update()
@@ -46,10 +47,14 @@ namespace KenneyJam2025
             float timeLeftPercentage = _timeLeft / LevelSettings[_currentLevelIndex].TimerDuration;
             
             
-            Debug.Log($"Time Left Percentage: {timeLeftPercentage}");
+            //Debug.Log($"Time Left Percentage: {timeLeftPercentage}");
             if (_weaponIndex >= 0 && timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x &&
                 timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow1Range.y)
             {
+                if(!_upgrade1Open)
+                {
+                    Debug.Log("Upgrade Window 1 Open");
+                }
                 _upgrade1Open = true;
                 if (_upgrade1AlreadyActivated) return; // Prevent multiple activations
                 if (UpdradeAction != null && UpdradeAction.action.WasPressedThisFrame())
@@ -63,6 +68,10 @@ namespace KenneyJam2025
             else if (_weaponIndex >= 1 && timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.x &&
                      timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow2Range.y)
             {
+                if(!_upgrade2Open)
+                {
+                    Debug.Log("Upgrade Window 2 Open");
+                }
                 _upgrade2Open = true;
                 if (_upgrade2AlreadyActivated) return; // Prevent multiple activations
                 if (UpdradeAction != null && UpdradeAction.action.WasPressedThisFrame())
@@ -78,6 +87,10 @@ namespace KenneyJam2025
             else if (_weaponIndex == 2 && timeLeftPercentage >= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.x &&
                      timeLeftPercentage <= LevelSettings[_currentLevelIndex].UpgradeWindow3Range.y)
             {
+                if(!_upgrade3Open)
+                {
+                    Debug.Log("Upgrade Window 3 Open");
+                }
                 _upgrade3Open = true;
                 if (_upgrade3AlreadyActivated) return; // Prevent multiple activations
                 if (UpdradeAction != null && UpdradeAction.action.WasPressedThisFrame())
@@ -92,27 +105,41 @@ namespace KenneyJam2025
             
             if (timeLeftPercentage < LevelSettings[_currentLevelIndex].UpgradeWindow1Range.x)
             {
-                if (_upgrade1Open && !_upgrade1AlreadyActivated && _weaponIndex > 0)
+                /*if (_upgrade1Open && !_upgrade1AlreadyActivated && _weaponIndex > 0)
                 {
                     GlobalEvents.GunUpgraded?.Invoke(_weaponIndex - 1);
+                }*/
+
+                if (_upgrade1Open)
+                {
+                    Debug.Log("Upgrade Window 1 Closed");
                 }
                 _upgrade1AlreadyActivated = false;
                 _upgrade1Open = false;
+                
             }
             if (timeLeftPercentage < LevelSettings[_currentLevelIndex].UpgradeWindow2Range.x)
             {
-                if (_upgrade2Open && !_upgrade2AlreadyActivated && _weaponIndex > 1)
+                /*if (_upgrade2Open && !_upgrade2AlreadyActivated && _weaponIndex > 1)
                 {
                     GlobalEvents.GunUpgraded?.Invoke(_weaponIndex - 1);
+                }*/
+                if (_upgrade2Open)
+                {
+                    Debug.Log("Upgrade Window 2 Closed");
                 }
                 _upgrade2AlreadyActivated = false;
                 _upgrade2Open = false;
             }
             if (timeLeftPercentage < LevelSettings[_currentLevelIndex].UpgradeWindow3Range.x)
             {
-                if (_upgrade3Open && !_upgrade3AlreadyActivated && _weaponIndex > 2)
+                /*if (_upgrade3Open && !_upgrade3AlreadyActivated && _weaponIndex > 2)
                 {
                     GlobalEvents.GunUpgraded?.Invoke(_weaponIndex - 1);
+                }*/
+                if (_upgrade3Open)
+                {
+                    Debug.Log("Upgrade Window 3 Closed");
                 }
                 _upgrade3AlreadyActivated = false;
                 _upgrade3Open = false;
@@ -127,15 +154,49 @@ namespace KenneyJam2025
             // draw timer bar
             float timerPercentage = _timeLeft / LevelSettings[_currentLevelIndex].TimerDuration;
             GUI.Box(new Rect(10, 10, 200, 20), $"Time Left: {Mathf.CeilToInt(_timeLeft)}s");
+            //green box
             GUI.Box(new Rect(10, 40, 200 * timerPercentage, 20), GUIContent.none);
             
             // draw upgrade windows
-            GUI.Box(new Rect(settings.UpgradeWindow1Range.x * 200f, 70, 
-                (settings.UpgradeWindow1Range.y - settings.UpgradeWindow1Range.x) * 200f, 20), "1");
-            GUI.Box(new Rect(settings.UpgradeWindow2Range.x * 200f, 70, 
-                (settings.UpgradeWindow2Range.y - settings.UpgradeWindow2Range.x) * 200f, 20), "2");
-            GUI.Box(new Rect(settings.UpgradeWindow3Range.x * 200f, 70, 
-                (settings.UpgradeWindow3Range.y - settings.UpgradeWindow3Range.x) * 200f, 20), "3");
+            if (_upgrade1Open && !_upgrade1AlreadyActivated)
+            {
+                GUIStyle styleBox1 = new GUIStyle
+                    { normal = new GUIStyleState { background = Texture2D.whiteTexture, textColor = Color.green } };
+                GUI.Box(new Rect(settings.UpgradeWindow1Range.x * 200f, 70, 
+                    (settings.UpgradeWindow1Range.y - settings.UpgradeWindow1Range.x) * 200f, 20), "1", styleBox1);
+            }
+            else
+            {
+                GUI.Box(new Rect(settings.UpgradeWindow1Range.x * 200f, 70, 
+                    (settings.UpgradeWindow1Range.y - settings.UpgradeWindow1Range.x) * 200f, 20), "1");
+            }
+            
+            if (_upgrade2Open && !_upgrade2AlreadyActivated)
+            {
+                GUIStyle styleBox2 = new GUIStyle
+                    { normal = new GUIStyleState { background = Texture2D.whiteTexture, textColor = Color.green } };
+                GUI.Box(new Rect(settings.UpgradeWindow2Range.x * 200f, 70, 
+                    (settings.UpgradeWindow2Range.y - settings.UpgradeWindow2Range.x) * 200f, 20), "2", styleBox2);
+            }
+            else
+            {
+                GUI.Box(new Rect(settings.UpgradeWindow2Range.x * 200f, 70, 
+                    (settings.UpgradeWindow2Range.y - settings.UpgradeWindow2Range.x) * 200f, 20), "2");
+            }
+            
+            if (_upgrade3Open && !_upgrade3AlreadyActivated)
+            {
+                GUIStyle styleBox3 = new GUIStyle
+                    { normal = new GUIStyleState { background = Texture2D.whiteTexture, textColor = Color.green } };
+                GUI.Box(new Rect(settings.UpgradeWindow3Range.x * 200f, 70, 
+                    (settings.UpgradeWindow3Range.y - settings.UpgradeWindow3Range.x) * 200f, 20), "3", styleBox3);
+            }
+            else
+            {
+                GUI.Box(new Rect(settings.UpgradeWindow3Range.x * 200f, 70, 
+                    (settings.UpgradeWindow3Range.y - settings.UpgradeWindow3Range.x) * 200f, 20), "3");
+            }
+            
         }
 
         public void OnSpecialBulletHit()
@@ -146,7 +207,7 @@ namespace KenneyJam2025
 
         public void OnSpecialBulletMiss()
         {
-            GlobalEvents.GunUpgraded.Invoke(_pendingUpgrade - 1);
+            //GlobalEvents.GunUpgraded.Invoke(_pendingUpgrade - 1);
             _pendingUpgrade = -1;
         }
     }
