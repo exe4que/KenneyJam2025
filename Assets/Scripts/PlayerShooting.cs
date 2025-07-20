@@ -82,21 +82,6 @@ namespace KenneyJam2025
             {
                 StopShooting();
             }
-
-            // only for testing purposes, comment out in production
-            if (_Gun0Action != null && _Gun0Action.action.WasPressedThisFrame())
-            {
-                EquipGun(0);
-            }
-            else if (_Gun1Action != null && _Gun1Action.action.WasPressedThisFrame())
-            {
-                EquipGun(1);
-            }
-            else if (_Gun2Action != null && _Gun2Action.action.WasPressedThisFrame())
-            {
-                EquipGun(2);
-            }
-
         }
 
         public string Name
