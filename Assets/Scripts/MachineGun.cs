@@ -1,24 +1,27 @@
-using System;
 using UnityEngine;
 
 namespace KenneyJam2025
 {
-    public class PistolGun : Gun
+    public class MachineGun : Gun
     {
+        [SerializeField] private float RecoilForce = 1f; // Recoil force applied to the shooter
+        
         private float _lastFireTime;
         private bool _isShooting;
         private IShooter _shooter;
+        private Rigidbody _rb;
 
         public override void Init(IShooter shooter)
         {
             _shooter = shooter;
+            _rb = _shooter.GameObject.GetComponent<Rigidbody>();
         }
 
         public override void Equip()
         {
             _lastFireTime = Time.time - FireRate - 1f;
             _isShooting = false;
-            Debug.Log("PistolGun equipped.");
+            Debug.Log("Machinegun equipped.");
         }
 
         public override void StartShooting()
@@ -51,7 +54,15 @@ namespace KenneyJam2025
                 {
                     Ray shootRay = new Ray(this.transform.position, this.transform.forward);
                     // Call the shooting manager to handle the bullet logic
-                    ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter, "BulletPrefab", false);
+                    ShootingManager.Instance.Shoot(shootRay, Range, Damage, _shooter, "MachineGunBulletPrefab", false);
+                    
+                    
+                    //apply recoil force to the shooter
+                    if (_rb != null)
+                    {
+                        Vector3 recoilDirection = -transform.forward * RecoilForce;
+                        _rb.AddForce(recoilDirection, ForceMode.Impulse);
+                    }
                 }
             }
         }
