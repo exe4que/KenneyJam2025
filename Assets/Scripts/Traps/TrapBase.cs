@@ -1,11 +1,12 @@
 using System.Diagnostics.Contracts;
+using KenneyJam2025;
 using UnityEngine;
 
 public abstract class TrapBase : MonoBehaviour
 {
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.GetComponent<IDamageable>() != null)
         {
             Activate(other.gameObject);
         }
