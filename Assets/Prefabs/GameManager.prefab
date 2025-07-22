@@ -47,7 +47,7 @@ MonoBehaviour:
   MainCamera: {fileID: 0}
   LevelSettings:
   - TimerDuration: 30
-    UpgradeWindow1Range: {x: 0.2, y: 0.25}
-    UpgradeWindow2Range: {x: 0.4, y: 0.45}
-    UpgradeWindow3Range: {x: 0.6, y: 0.65}
+    UpgradeWindow1Range: {x: 0.2, y: 0.4}
+    UpgradeWindow2Range: {x: 0.4, y: 0.6}
+    UpgradeWindow3Range: {x: 0.6, y: 0.8}
   UpdradeAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}

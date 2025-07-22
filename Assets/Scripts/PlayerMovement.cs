@@ -36,8 +36,11 @@ namespace KenneyJam2025
         
         private void OnPlayerDied()
         {
-            Vector3 randomPosition = transform.position + Random.insideUnitSphere;
-            _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
+            this.DelayedCallInSeconds(() =>
+            {
+                Vector3 randomPosition = transform.position + Random.insideUnitSphere;
+                _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
+            }, 0.25f);
         }
 
         private void Start()

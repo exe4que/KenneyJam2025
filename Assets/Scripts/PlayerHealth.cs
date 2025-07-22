@@ -8,7 +8,8 @@ namespace KenneyJam2025
         [SerializeField] private float maxHealth = 100f;
         
         public float MaxHealth => maxHealth;
-        public float currentHealth {get; private set;}
+        public float CurrentHealth => currentHealth;
+        public float currentHealth = 0f;
 
         public string Name
         {
@@ -48,6 +49,9 @@ namespace KenneyJam2025
             currentHealth = 0f;
             GlobalEvents.PlayerDied?.Invoke();
             Debug.Log("Player has died.");
+            
+            var vfxGo = PoolManager.Instance.GetInstance("vfx_MineExplosion");
+            vfxGo.transform.position = transform.position;
         }
 
         public void OnHeal(float heal)
