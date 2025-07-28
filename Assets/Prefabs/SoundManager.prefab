@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1336515190398727021}
   - component: {fileID: 3013780871326410674}
   - component: {fileID: 7687646932252716615}
-  - component: {fileID: 6531490991096807970}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -175,10 +174,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234de1830eb33c044a321886d8988c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneMusic: {fileID: 0}
+  _sceneMusic: {fileID: 8300000, guid: d3740063f497be74a9eb8a23efce2fac, type: 3}
   ShotFired: {fileID: 11400000, guid: 4f5f043bf4cb42345a3a08de44b4fcb2, type: 2}
   SomethingDamaged: {fileID: 11400000, guid: cb47798224ade8041abc20d9ce55af6a, type: 2}
   PlayerDied: {fileID: 11400000, guid: 6a91dc2cae1215541b5d2ad0058bcabc, type: 2}
+  GunUpgraded: {fileID: 11400000, guid: 9091abd8902466c4d821d2541f99e998, type: 2}
 --- !u!82 &7687646932252716615
 AudioSource:
   m_ObjectHideFlags: 0
@@ -276,16 +276,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6531490991096807970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1655291309964055125}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b6ebd11687a0dc46a6e3c9b2434eb7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  click: {fileID: 3001919216989983466, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -1,6 +1,9 @@
 using System;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor;
+using UnityEditor.Build.Content;
+#endif
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -40,10 +43,28 @@ namespace KenneyJam2025
         private bool _isAlive = true; // Flag to check if the AI is alive
         
         private float currentHealth;
+        private float _nextTimeSpecialBullet = 0f; // Time to wait before shooting a special bullet
+
+        private void OnEnable()
+        {
+            GlobalEvents.GunUpgraded += OnGunUpgraded;
+        }
         
+        private void OnDisable()
+        {
+            GlobalEvents.GunUpgraded -= OnGunUpgraded;
+        }
+        
+        private void OnGunUpgraded(IShooter shooter, int index)
+        {
+            if (shooter != this) return;
+            EquipGun(index);
+            Debug.Log($"{this.gameObject.name}: Gun upgraded to index: {index}".Color(Color.green));
+        }
+
         private void Start()
         {
-            _animator.SetFloat("Run", 1f);
+            currentHealth = maxHealth;
             InitializeStates();
             if (_guns.Length == 0)
             {
@@ -57,6 +78,8 @@ namespace KenneyJam2025
             }
             EquipGun(0);
             ShootersManager.Instance.RegisterShooter(this);
+            float timerDuration = GameManager.Instance.CurrentLevelSettings.TimerDuration;
+            _nextTimeSpecialBullet = Time.time + Random.Range(timerDuration * 0.5f, timerDuration); // Randomize initial special bullet time
         }
 
         private void InitializeStates()
@@ -70,14 +93,24 @@ namespace KenneyJam2025
 
         private void Update()
         {
-            if (!_isAlive) return; // If AI is not alive, skip updates
+            if (this == null || !_isAlive) return; // If AI is not alive, skip updates
             if (GameManager.Instance.GameOver) return;
             if (this.transform.position.y < -6f)
             {
                 // If the player falls below a certain height, they die
                 Die(null);
+                return;
             }
+            float speedPercent = Mathf.Min(1f, _agent.velocity.magnitude / 1f);
+            _animator.SetFloat("Run", speedPercent);
             UpdateStateMachine();
+            if (Time.time > _nextTimeSpecialBullet)
+            {
+                _equipedGun.ShootSpecialBullet();
+                float duration = GameManager.Instance.CurrentLevelSettings.TimerDuration;
+                _nextTimeSpecialBullet = Time.time + Random.Range(duration * 0.5f, 
+                    GameManager.Instance.CurrentLevelSettings.TimerDuration); // Randomize next special bullet time
+            }
         }
 
         private void UpdateStateMachine()
@@ -280,6 +313,9 @@ namespace KenneyJam2025
         }
         #endif
         public string Name => gameObject.name;
+        public float MaxHealth => maxHealth;
+        public float CurrentHealth => currentHealth;
+
         public void OnDamage(float damage, IShooter shooter)
         {
             if (!_isAlive) return; // If AI is already dead, ignore damage
@@ -304,14 +340,23 @@ namespace KenneyJam2025
             StopShooting(); // Stop shooting if AI dies
             _agent.isStopped = true; // Stop the agent
             _agent.updatePosition = false; // Disable position updates
-
-            _rigidbody.constraints = RigidbodyConstraints.None;
-            //add explosion force
-            Vector3 randomPosition = transform.position + Random.insideUnitSphere;
-            //make it explode
-            _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
             currentHealth = 0f; // Set health to zero
+            
+            var vfxGo = PoolManager.Instance.GetInstance("vfx_MineExplosion");
+            vfxGo.transform.position = transform.position;
+            
             ShootersManager.Instance.UnregisterShooter(this); // Unregister from the shooters manager
+
+            this.DelayedCallInSeconds(() =>
+            {
+                _rigidbody.constraints = RigidbodyConstraints.None;
+                //add explosion force
+                Vector3 randomPosition = transform.position + Random.insideUnitSphere;
+                //make it explode
+                _rigidbody.AddExplosionForce(10f, randomPosition, 5f, 1f, ForceMode.Impulse);
+
+            }, 0.25f);
+
             
             this.DelayedCallInSeconds(() =>
             {
@@ -335,9 +380,24 @@ namespace KenneyJam2025
             throw new NotImplementedException();
         }
 
-        public Vector3 Position => transform.position;
+        public Vector3 Position
+        {
+            get
+            {
+                try
+                {
+                    return transform.position;
+                }
+                catch (Exception e)
+                {
+                    return Vector3.zero;
+                }
+            }
+        }
+
         public GameObject GameObject => gameObject;
         public float ImprecisionNoise => _shootingImprecisionNoise;
+        public int WeaponIndex { get; set; }
 
         public void EquipGun(int index)
         {
@@ -355,6 +415,7 @@ namespace KenneyJam2025
             _equipedGun = _guns[index];
             _equipedGun.Equip(); // Equip the new gun
             Debug.Log($"Equipped gun: {_equipedGun.name}");
+            WeaponIndex = index;
         }
 
         public void StartShooting()

@@ -44,19 +44,30 @@ public class SoundManager : MonoBehaviour
           _musicSource = audioSources[1];
      }
 
-     void Start()
+     private void OnEnable()
      {
-          // Subscribes to events from global events manager
           GlobalEvents.ShotFired += OnShotFired;
           GlobalEvents.SomethingDamaged += OnSomethingDamaged;
           GlobalEvents.PlayerDied += OnPlayerDied;
           GlobalEvents.GunUpgraded += OnGunUpgraded;
+     }
 
+     private void OnDisable()
+     {
+          GlobalEvents.ShotFired -= OnShotFired;
+          GlobalEvents.SomethingDamaged -= OnSomethingDamaged;
+          GlobalEvents.PlayerDied -= OnPlayerDied;
+          GlobalEvents.GunUpgraded -= OnGunUpgraded;
+     }
+
+     void Start()
+     {
           // If it has, it reproduces music
           if (_sceneMusic != null)
           {
                _musicSource.clip = _sceneMusic;
                _musicSource.Play();
+               _musicSource.loop = true;
           }
      }
 
@@ -87,16 +98,5 @@ public class SoundManager : MonoBehaviour
                _audioFXSource.PlayOneShot(fx.Clip, fx.GetRandomVolume());
           }
      }
-
-
-    void OnDestroy()
-    {
-          //Unsuscribes from the events 
-          GlobalEvents.ShotFired -= OnShotFired;
-          GlobalEvents.SomethingDamaged -= OnSomethingDamaged;
-          GlobalEvents.PlayerDied -= OnPlayerDied;
-    }
-
-
 }
 

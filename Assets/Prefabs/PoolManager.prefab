@@ -53,3 +53,5 @@ MonoBehaviour:
     InitialSize: 100
   - Prefab: {fileID: 2296005608749743692, guid: b2fe1db3cbe5b28c599465c68ba9cb97, type: 3}
     InitialSize: 100
+  - Prefab: {fileID: 99776912596985787, guid: 87d6250599e00064d851c3728ab46708, type: 3}
+    InitialSize: 10

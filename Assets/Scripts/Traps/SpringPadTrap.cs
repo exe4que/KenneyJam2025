@@ -1,3 +1,4 @@
+using KenneyJam2025;
 using UnityEngine;
 
 public class SpringPadTrap : TrapBase
@@ -13,8 +14,6 @@ public class SpringPadTrap : TrapBase
 
     protected override void Activate(GameObject target)
     {
-        if (!target.CompareTag("Player")) return;
-
         Rigidbody rb = target.GetComponent<Rigidbody>();
         if (rb != null)
         {

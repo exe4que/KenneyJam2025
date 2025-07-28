@@ -6,7 +6,6 @@ public class MineTrap : TrapBase
 {
     [SerializeField] private float _explosionRadius = 5f;
     [SerializeField] private float _damage = 50f;
-    [SerializeField] private GameObject _explosionEffect;
     [SerializeField] private float _delayBeforeExplosion = 0.5f;
 
     [Header("Visual Flash")]
@@ -49,14 +48,17 @@ public class MineTrap : TrapBase
         }
 
         _rend.material.color = _originalColor;
-
-        if (_explosionEffect != null)
-            Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+        
+        GameObject vfxGo = PoolManager.Instance.GetInstance("vfx_MineExplosion");
+        vfxGo.transform.position = transform.position;
+        //Instantiate(_explosionEffect, transform.position, Quaternion.identity);
+        
+        yield return new WaitForSeconds(0.25f);
 
         Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRadius);
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Player"))
+            if (hit.gameObject.GetComponent<IDamageable>() != null)
             {
                 var healt = hit.GetComponent<IDamageable>();
                 healt?.OnDamage(_damage, null);
